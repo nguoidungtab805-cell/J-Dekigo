@@ -1,3991 +1,760 @@
-<!-- =========================================================
-     FILE: Home.html
-     NIHONGO MASTER FPT
-     Japanese Learning Homepage
-     ========================================================= -->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>J-DEKI GO</title>
 
 <style>
-  /* =========================================================
-     1. ROOT
-     ========================================================= */
-
-  :root {
-    --nm-orange: #ff5a1f;
-    --nm-orange-2: #ff6b2c;
-    --nm-orange-dark: #df4210;
-    --nm-orange-soft: #fff2e9;
-
-    --nm-red: #e84724;
-    --nm-red-dark: #b83218;
-
-    --nm-cream: #fffaf5;
-    --nm-white: #ffffff;
-
-    --nm-text: #222222;
-    --nm-text-2: #4f4f4f;
-    --nm-muted: #777777;
-
-    --nm-border: #f0dfd4;
-
-    --nm-blue: #2878d8;
-    --nm-blue-soft: #edf5ff;
-
-    --nm-yellow: #ffbf4d;
-    --nm-yellow-soft: #fff7df;
-
-    --nm-green: #5e936c;
-
-    --nm-shadow-sm:
-      0 5px 18px rgba(95, 55, 32, 0.06);
-
-    --nm-shadow:
-      0 12px 35px rgba(95, 55, 32, 0.08);
-
-    --nm-shadow-orange:
-      0 12px 28px rgba(255, 90, 31, 0.20);
-
-    --nm-radius: 20px;
-  }
-
-
-  /* =========================================================
-     2. GLOBAL
-     ========================================================= */
-
-  .nm-home {
-    width: 100%;
-    min-height: 100vh;
-    background:
-      radial-gradient(
-        circle at 15% 20%,
-        rgba(255, 211, 178, 0.18),
-        transparent 25%
-      ),
-      linear-gradient(
-        180deg,
-        #ffffff 0%,
-        #fffaf6 50%,
-        #ffffff 100%
-      );
-
-    color: var(--nm-text);
-    font-family:
-      "Segoe UI",
-      "Inter",
-      "Noto Sans",
-      Arial,
-      sans-serif;
-
-    overflow-x: hidden;
-  }
-
-  .nm-home *,
-  .nm-home *::before,
-  .nm-home *::after {
-    box-sizing: border-box;
-  }
-
-  .nm-container {
-    width: min(1470px, calc(100% - 70px));
-    margin: 0 auto;
-  }
-
-  button,
-  a {
-    font-family: inherit;
-  }
-
-  button {
-    cursor: pointer;
-  }
-
-
-  /* =========================================================
-     3. HEADER
-     ========================================================= */
-
-  .nm-header {
-    height: 86px;
-    background: rgba(255,255,255,0.98);
-    border-bottom: 1px solid #f1eee9;
-
-    display: flex;
-    align-items: center;
-
-    position: relative;
-    z-index: 20;
-
-    box-shadow:
-      0 2px 12px rgba(50, 30, 20, 0.035);
-  }
-
-  .nm-header-inner {
-    width: min(1470px, calc(100% - 70px));
-    margin: 0 auto;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    gap: 30px;
-  }
-
-
-  /* =========================================================
-     4. LOGO
-     ========================================================= */
-
-  .nm-logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-
-    min-width: 260px;
-
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .nm-logo-symbol {
-    width: 52px;
-    height: 52px;
-
-    flex: 0 0 52px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .nm-logo-text {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .nm-logo-title {
-    font-size: 23px;
-    line-height: 1;
-    font-weight: 800;
-    color: var(--nm-orange);
-    letter-spacing: -0.4px;
-  }
-
-  .nm-logo-subtitle {
-    font-size: 12px;
-    color: #777;
-    font-weight: 500;
-  }
-
-
-  /* =========================================================
-     5. NAVIGATION
-     ========================================================= */
-
-  .nm-nav {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-
-    flex: 1;
-  }
-
-  .nm-nav-item {
-    border: 0;
-    background: transparent;
-
-    padding: 11px 17px;
-
-    border-radius: 13px;
-
-    font-size: 15px;
-    font-weight: 600;
-
-    color: #4b4b4b;
-
-    transition:
-      background 0.2s ease,
-      color 0.2s ease,
-      transform 0.2s ease;
-  }
-
-  .nm-nav-item:hover {
-    color: var(--nm-orange);
-    background: #fff4ed;
-  }
-
-  .nm-nav-item.active {
-    color: white;
-    background: var(--nm-orange);
-
-    box-shadow:
-      0 6px 16px rgba(255, 90, 31, 0.20);
-  }
-
-
-  /* =========================================================
-     6. HEADER ACTIONS
-     ========================================================= */
-
-  .nm-header-actions {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    min-width: 260px;
-    justify-content: flex-end;
-  }
-
-  .nm-theme-btn {
-    width: 42px;
-    height: 42px;
-
-    border-radius: 50%;
-
-    border: 1px solid #ddd;
-    background: white;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    color: #555;
-
-    transition: all 0.2s ease;
-  }
-
-  .nm-theme-btn:hover {
-    border-color: var(--nm-orange);
-    color: var(--nm-orange);
-    background: #fff8f3;
-  }
-
-  .nm-auth-btn {
-    height: 43px;
-    padding: 0 23px;
-
-    border-radius: 11px;
-
-    font-size: 14px;
-    font-weight: 700;
-
-    transition: all 0.2s ease;
-  }
-
-  .nm-login {
-    border: 1.5px solid var(--nm-orange);
-    color: var(--nm-orange);
-    background: white;
-  }
-
-  .nm-login:hover {
-    background: #fff4ed;
-  }
-
-  .nm-register {
-    border: 1.5px solid var(--nm-orange);
-    background: var(--nm-orange);
-    color: white;
-
-    box-shadow:
-      0 6px 15px rgba(255, 90, 31, 0.18);
-  }
-
-  .nm-register:hover {
-    background: var(--nm-orange-dark);
-    transform: translateY(-1px);
-  }
-
-
-  /* =========================================================
-     7. MAIN
-     ========================================================= */
-
-  .nm-main {
-    padding: 16px 0 55px;
-  }
-
-
-  /* =========================================================
-     8. HERO
-     ========================================================= */
-
-  .nm-hero {
-    position: relative;
-
-    min-height: 445px;
-
-    border-radius: 24px;
-
-    overflow: hidden;
-
-    border: 1px solid #f4cdbb;
-
-    background:
-      linear-gradient(
-        110deg,
-        #fff7ef 0%,
-        #fff0e5 52%,
-        #ffe4d5 100%
-      );
-
-    box-shadow:
-      0 12px 35px rgba(190, 86, 37, 0.08);
-  }
-
-  .nm-hero-content {
-    position: relative;
-    z-index: 5;
-
-    width: 53%;
-
-    padding:
-      53px
-      0
-      48px
-      44px;
-  }
-
-
-  /* =========================================================
-     9. DECORATIVE SAKURA
-     ========================================================= */
-
-  .nm-sakura-branch {
-    position: absolute;
-
-    z-index: 2;
-
-    pointer-events: none;
-  }
-
-  .nm-branch-left {
-    top: -15px;
-    left: 350px;
-
-    width: 390px;
-    height: 170px;
-
-    transform: rotate(-2deg);
-  }
-
-  .nm-branch-right {
-    top: -20px;
-    right: -20px;
-
-    width: 390px;
-    height: 170px;
-
-    transform: scaleX(-1);
-  }
-
-
-  /* =========================================================
-     10. HERO BADGE
-     ========================================================= */
-
-  .nm-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
-
-    background: rgba(255,255,255,0.94);
-
-    padding: 9px 16px;
-
-    border-radius: 30px;
-
-    color: var(--nm-orange);
-
-    font-size: 12px;
-    font-weight: 800;
-
-    box-shadow:
-      0 6px 16px rgba(93, 52, 31, 0.07);
-
-    margin-bottom: 22px;
-  }
-
-
-  /* =========================================================
-     11. HERO TITLE
-     ========================================================= */
-
-  .nm-hero-title {
-    margin: 0;
-
-    font-size: clamp(42px, 4vw, 62px);
-
-    line-height: 1.08;
-
-    letter-spacing: -1.9px;
-
-    font-weight: 850;
-
-    color: #9f321f;
-  }
-
-  .nm-hero-title span {
-    display: block;
-
-    color: var(--nm-orange);
-
-    margin-top: 2px;
-  }
-
-
-  /* =========================================================
-     12. HERO DESCRIPTION
-     ========================================================= */
-
-  .nm-hero-description {
-    max-width: 570px;
-
-    margin:
-      21px
-      0
-      27px;
-
-    font-size: 16px;
-
-    line-height: 1.75;
-
-    color: #5c5c5c;
-
-    font-weight: 500;
-  }
-
-
-  /* =========================================================
-     13. HERO BUTTONS
-     ========================================================= */
-
-  .nm-hero-buttons {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-
-    flex-wrap: wrap;
-  }
-
-  .nm-primary-btn,
-  .nm-secondary-btn {
-    min-height: 53px;
-
-    padding: 0 27px;
-
-    border-radius: 15px;
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    gap: 10px;
-
-    font-size: 15px;
-    font-weight: 800;
-
-    transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease,
-      background 0.2s ease;
-  }
-
-  .nm-primary-btn {
-    border: 1px solid var(--nm-orange);
-    background: var(--nm-orange);
-    color: white;
-
-    box-shadow:
-      0 10px 22px rgba(255, 90, 31, 0.22);
-  }
-
-  .nm-primary-btn:hover {
-    transform: translateY(-2px);
-    background: var(--nm-orange-dark);
-
-    box-shadow:
-      0 13px 25px rgba(255, 90, 31, 0.28);
-  }
-
-  .nm-secondary-btn {
-    border: 1.5px solid var(--nm-orange);
-    background: white;
-    color: var(--nm-orange);
-  }
-
-  .nm-secondary-btn:hover {
-    transform: translateY(-2px);
-    background: #fff7f2;
-  }
-
-
-  /* =========================================================
-     14. HERO SVG ILLUSTRATION
-     ========================================================= */
-
-  .nm-hero-art {
-    position: absolute;
-
-    right: 0;
-    bottom: 0;
-
-    width: 55%;
-    height: 100%;
-
-    z-index: 3;
-
-    pointer-events: none;
-
-    /*
-     * Natural-image finishing pass.
-     * This does not alter the hero geometry, crop, camera position,
-     * spacing, or any SVG coordinates. It only reduces the flat,
-     * oversaturated vector appearance and introduces restrained
-     * photographic micro-contrast.
-     */
-    isolation: isolate;
-    filter:
-      saturate(0.94)
-      contrast(1.035)
-      brightness(0.995);
-  }
-
-  .nm-hero-art svg {
-    width: 100%;
-    height: 100%;
-
-    display: block;
-
-    overflow: visible;
-    shape-rendering: geometricPrecision;
-    text-rendering: optimizeLegibility;
-  }
-
-
-  /* =========================================================
-     15. HERO CLOUD / WAVE
-     ========================================================= */
-
-  .nm-hero-wave {
-    position: absolute;
-
-    left: 0;
-    bottom: -1px;
-
-    width: 100%;
-    height: 95px;
-
-    z-index: 2;
-
-    opacity: 0.75;
-
-    pointer-events: none;
-  }
-
-
-  /* =========================================================
-     16. FEATURE SECTION
-     ========================================================= */
-
-  .nm-features {
-    margin-top: 25px;
-  }
-
-  .nm-feature-grid {
-    display: grid;
-
-    grid-template-columns:
-      repeat(3, minmax(0, 1fr));
-
-    gap: 16px;
-  }
-
-  .nm-feature-card {
-    min-height: 205px;
-
-    position: relative;
-
-    overflow: hidden;
-
-    border-radius: 20px;
-
-    border: 1px solid #f0dfd5;
-
-    background: white;
-
-    padding: 27px 28px;
-
-    box-shadow:
-      0 8px 25px rgba(90, 45, 20, 0.055);
-
-    cursor: pointer;
-
-    transition:
-      transform 0.25s ease,
-      box-shadow 0.25s ease,
-      border-color 0.25s ease;
-  }
-
-  .nm-feature-card:hover {
-    transform: translateY(-5px);
-
-    border-color: #ffd0b8;
-
-    box-shadow:
-      0 15px 32px rgba(90, 45, 20, 0.09);
-  }
-
-  .nm-feature-top {
-    display: flex;
-    align-items: center;
-
-    gap: 17px;
-
-    position: relative;
-    z-index: 2;
-  }
-
-  .nm-feature-icon {
-    width: 64px;
-    height: 64px;
-
-    flex: 0 0 64px;
-
-    border-radius: 50%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .nm-feature-icon.orange {
-    color: #e94721;
-    background:
-      linear-gradient(
-        145deg,
-        #fff0e9,
-        #ffe1d5
-      );
-  }
-
-  .nm-feature-icon.yellow {
-    color: #d97800;
-    background:
-      linear-gradient(
-        145deg,
-        #fff8df,
-        #ffedbd
-      );
-  }
-
-  .nm-feature-icon.blue {
-    color: #1769d4;
-    background:
-      linear-gradient(
-        145deg,
-        #eef6ff,
-        #dcecff
-      );
-  }
-
-  .nm-feature-title {
-    margin: 0;
-
-    font-size: 19px;
-
-    font-weight: 800;
-
-    color: #252525;
-  }
-
-  .nm-feature-description {
-    position: relative;
-    z-index: 2;
-
-    margin:
-      17px
-      0
-      16px;
-
-    max-width: 450px;
-
-    font-size: 13.5px;
-
-    line-height: 1.7;
-
-    color: #666;
-  }
-
-  .nm-feature-link {
-    position: relative;
-    z-index: 2;
-
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-
-    font-size: 14px;
-    font-weight: 800;
-
-    text-decoration: none;
-
-    color: var(--nm-orange);
-  }
-
-  .nm-feature-link.blue {
-    color: var(--nm-blue);
-  }
-
-  .nm-feature-decoration {
-    position: absolute;
-
-    right: -4px;
-    bottom: -8px;
-
-    opacity: 0.9;
-
-    pointer-events: none;
-  }
-
-
-  /* =========================================================
-     17. DAILY LEARNING
-     ========================================================= */
-
-  .nm-daily {
-    margin-top: 28px;
-
-    background: white;
-
-    border: 1px solid #f1e5dd;
-
-    border-radius: 21px;
-
-    padding: 22px;
-
-    box-shadow:
-      0 8px 25px rgba(90, 45, 20, 0.045);
-  }
-
-  .nm-daily-grid {
-    display: grid;
-
-    grid-template-columns:
-      190px
-      repeat(7, minmax(0, 1fr));
-
-    gap: 12px;
-
-    align-items: stretch;
-  }
-
-  .nm-daily-heading {
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: flex-start;
-    justify-content: center;
-
-    padding: 15px;
-  }
-
-  .nm-daily-flower {
-    width: 55px;
-    height: 55px;
-
-    margin-bottom: 12px;
-  }
-
-  .nm-daily-heading h3 {
-    margin: 0;
-
-    font-size: 18px;
-
-    line-height: 1.3;
-
-    color: #222;
-  }
-
-  .nm-shortcut {
-    min-height: 145px;
-
-    border-radius: 17px;
-
-    background:
-      linear-gradient(
-        145deg,
-        #fffaf5,
-        #fff3e8
-      );
-
-    border: 1px solid #f5e4d7;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-    justify-content: center;
-
-    padding: 10px;
-
-    cursor: pointer;
-
-    text-decoration: none;
-
-    color: inherit;
-
-    transition:
-      transform 0.2s ease,
-      border-color 0.2s ease,
-      box-shadow 0.2s ease;
-  }
-
-  .nm-shortcut:hover {
-    transform: translateY(-5px);
-
-    border-color: #ffc7a8;
-
-    box-shadow:
-      0 10px 20px rgba(255, 90, 31, 0.10);
-  }
-
-  .nm-shortcut-icon {
-    width: 72px;
-    height: 72px;
-
-    margin-bottom: 8px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .nm-shortcut-title {
-    font-size: 13.5px;
-
-    font-weight: 800;
-
-    text-align: center;
-
-    color: #333;
-  }
-
-
-  /* =========================================================
-     18. MINI SVG ICON SYSTEM
-     ========================================================= */
-
-  .nm-icon {
-    width: 29px;
-    height: 29px;
-
-    display: block;
-  }
-
-  .nm-icon-small {
-    width: 19px;
-    height: 19px;
-
-    display: block;
-  }
-
-
-
-  /* =========================================================
-     19. HERO IMAGE QUALITY FINISH
-     =========================================================
-     The current Home uses inline vector artwork rather than a
-     photographic bitmap. These adjustments therefore improve
-     tonal depth, edge quality and material separation without
-     inventing people, faces, skin, hair, or a different composition.
-  */
-  .nm-hero-art,
-  .nm-hero-art svg {
-    backface-visibility: hidden;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  .nm-hero-art svg {
-    vector-effect: non-scaling-stroke;
-  }
-
-  .nm-hero-art text {
-    paint-order: stroke fill;
-    stroke: rgba(45, 28, 20, 0.04);
-    stroke-width: 0.35px;
-  }
-
-  /* =========================================================
-     19. RESPONSIVE
-     ========================================================= */
-
-  @media (max-width: 1250px) {
-
-    .nm-container,
-    .nm-header-inner {
-      width: min(1160px, calc(100% - 40px));
-    }
-
-    .nm-logo {
-      min-width: 220px;
-    }
-
-    .nm-header-actions {
-      min-width: 220px;
-    }
-
-    .nm-nav-item {
-      padding-left: 11px;
-      padding-right: 11px;
-    }
-
-    .nm-hero-content {
-      width: 58%;
-      padding-left: 38px;
-    }
-
-    .nm-hero-art {
-      width: 54%;
-    }
-
-    .nm-daily-grid {
-      grid-template-columns:
-        150px
-        repeat(7, minmax(0, 1fr));
-    }
-  }
-
-
-  @media (max-width: 1050px) {
-
-    .nm-header {
-      height: auto;
-      min-height: 76px;
-    }
-
-    .nm-header-inner {
-      padding: 10px 0;
-      flex-wrap: wrap;
-    }
-
-    .nm-logo {
-      min-width: auto;
-    }
-
-    .nm-nav {
-      order: 3;
-      flex-basis: 100%;
-
-      overflow-x: auto;
-
-      justify-content: flex-start;
-
-      padding-bottom: 3px;
-    }
-
-    .nm-header-actions {
-      margin-left: auto;
-    }
-
-    .nm-hero {
-      min-height: 500px;
-    }
-
-    .nm-hero-content {
-      width: 100%;
-      padding-right: 42%;
-    }
-
-    .nm-hero-art {
-      width: 54%;
-      opacity: 0.92;
-    }
-
-    .nm-feature-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .nm-daily-grid {
-      grid-template-columns:
-        repeat(4, minmax(0, 1fr));
-    }
-
-    .nm-daily-heading {
-      grid-column: 1 / -1;
-
-      flex-direction: row;
-
-      align-items: center;
-
-      gap: 12px;
-
-      padding: 8px 5px;
-    }
-
-    .nm-daily-flower {
-      margin: 0;
-    }
-  }
-
-
-  @media (max-width: 760px) {
-
-    .nm-container,
-    .nm-header-inner {
-      width: calc(100% - 28px);
-    }
-
-    .nm-header {
-      padding: 6px 0;
-    }
-
-    .nm-logo-title {
-      font-size: 18px;
-    }
-
-    .nm-logo-subtitle {
-      font-size: 10px;
-    }
-
-    .nm-logo-symbol {
-      width: 42px;
-      height: 42px;
-      flex-basis: 42px;
-    }
-
-    .nm-header-actions {
-      min-width: auto;
-    }
-
-    .nm-theme-btn {
-      display: none;
-    }
-
-    .nm-auth-btn {
-      height: 38px;
-      padding: 0 13px;
-      font-size: 12px;
-    }
-
-    .nm-nav {
-      gap: 2px;
-    }
-
-    .nm-nav-item {
-      font-size: 12px;
-      padding: 8px 10px;
-      white-space: nowrap;
-    }
-
-    .nm-main {
-      padding-top: 12px;
-    }
-
-    .nm-hero {
-      min-height: 690px;
-
-      border-radius: 20px;
-    }
-
-    .nm-hero-content {
-      width: 100%;
-
-      padding:
-        35px
-        25px
-        270px;
-    }
-
-    .nm-hero-title {
-      font-size: 40px;
-    }
-
-    .nm-hero-description {
-      font-size: 14px;
-    }
-
-    .nm-hero-art {
-      width: 100%;
-      height: 52%;
-
-      bottom: 0;
-      right: 0;
-    }
-
-    .nm-branch-left {
-      left: 100px;
-      width: 300px;
-    }
-
-    .nm-branch-right {
-      width: 300px;
-    }
-
-    .nm-feature-card {
-      min-height: 200px;
-    }
-
-    .nm-daily {
-      padding: 14px;
-    }
-
-    .nm-daily-grid {
-      grid-template-columns:
-        repeat(2, minmax(0, 1fr));
-    }
-
-    .nm-daily-heading {
-      grid-column: 1 / -1;
-    }
-  }
-
-
-  @media (max-width: 450px) {
-
-    .nm-logo-symbol {
-      display: none;
-    }
-
-    .nm-logo-title {
-      font-size: 16px;
-    }
-
-    .nm-logo-subtitle {
-      display: none;
-    }
-
-    .nm-login {
-      display: none;
-    }
-
-    .nm-hero {
-      min-height: 670px;
-    }
-
-    .nm-hero-content {
-      padding:
-        28px
-        20px
-        265px;
-    }
-
-    .nm-hero-title {
-      font-size: 34px;
-      letter-spacing: -1px;
-    }
-
-    .nm-badge {
-      font-size: 10px;
-      padding: 8px 12px;
-    }
-
-    .nm-primary-btn,
-    .nm-secondary-btn {
-      min-height: 48px;
-      padding: 0 18px;
-      font-size: 13px;
-    }
-
-    .nm-feature-card {
-      padding: 22px;
-    }
-
-    .nm-daily-grid {
-      gap: 8px;
-    }
-
-    .nm-shortcut {
-      min-height: 130px;
-    }
-
-    .nm-shortcut-icon {
-      width: 58px;
-      height: 58px;
-    }
-  }
-
-
-/* =========================================================
-   JAPANESE NATURAL VISUAL OVERRIDES
-   ========================================================= */
-:root{
-  --jp-orange:#FF6500;
-  --jp-cream:#FFF8F0;
-  --jp-sakura:#F6B7C8;
-  --jp-red:#C83C3C;
-  --jp-ink:#3d2a24;
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 body{
-  background-color:var(--jp-cream);
-  background-image:
-    radial-gradient(circle at 12% 8%, rgba(246,183,200,.10) 0 2px, transparent 3px),
-    radial-gradient(circle at 88% 18%, rgba(200,60,60,.07) 0 2px, transparent 3px),
-    repeating-radial-gradient(circle at 50% 120%, rgba(200,60,60,.035) 0 1px, transparent 1px 18px);
+  font-family:Arial,"Noto Sans JP",sans-serif;
+  background:#fffdf9;
+  color:#333;
+  overflow-x:hidden;
 }
 
-/* Keep decorations delicate rather than sticker-like. */
-.nm-sakura-branch{opacity:.72;filter:saturate(.86)}
-.nm-sakura-branch svg{overflow:visible}
-
-/* Hero image container */
-.nm-hero-art{
-  overflow:hidden;
-  border-radius:22px;
-  isolation:isolate;
+button,
+a{
+  font:inherit;
 }
-.nm-hero-art::after{
+
+button{
+  border:0;
+  background:none;
+  cursor:pointer;
+}
+
+a{
+  text-decoration:none;
+}
+
+/* =========================
+   SIDEBAR + BACKGROUND
+========================= */
+
+body::before{
   content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background:linear-gradient(90deg,rgba(255,248,240,.04),rgba(255,248,240,.12));
-  z-index:3;
-}
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  width:164px;
 
-/* Local real assets. Replace these files with the supplied reference images. */
-.nm-hero-art.jp-real-image{
   background:
-    linear-gradient(90deg,rgba(45,24,18,.16),rgba(45,24,18,.02)),
-    url("assets/hero-background.webp") center/cover no-repeat;
+    url("YOUR_LEFT_BACKGROUND_IMAGE")
+    left top/
+    164px 643px
+    repeat-y;
+
+  z-index:-2;
 }
-.nm-hero-photo{
+
+body::after{
+  content:"";
+  position:fixed;
+  right:0;
+  top:0;
+  bottom:0;
+  width:65px;
+
+  background:
+    url("YOUR_RIGHT_BACKGROUND_IMAGE")
+    right top/
+    65px 643px
+    repeat-y;
+
+  z-index:-2;
+}
+
+/* =========================
+   MAIN SIDEBAR
+========================= */
+
+.sidebar{
+  position:fixed;
+  z-index:50;
+
+  left:15px;
+  top:15px;
+
+  width:86px;
+  height:calc(100vh - 30px);
+
+  background:
+    url("YOUR_SIDEBAR_IMAGE")
+    center top/
+    86px 614px
+    no-repeat;
+}
+
+/* vùng click menu */
+
+.side-hit{
   position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center;
-  display:block;
-  z-index:1;
+
+  left:0;
+
+  width:86px;
+  height:57px;
+
+  border-radius:15px;
+
+  cursor:pointer;
 }
 
-/* Illustration assets */
-.jp-asset{
-  display:block;
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  object-position:center bottom;
-  filter:saturate(.92) contrast(.98);
+.side-home{
+  top:88px;
 }
-.jp-asset-wrap{
+
+.side-grammar{
+  top:145px;
+}
+
+.side-vocab{
+  top:202px;
+}
+
+.side-kanji{
+  top:259px;
+}
+
+.side-test{
+  top:316px;
+}
+
+.side-video{
+  top:373px;
+}
+
+.side-speaking{
+  top:430px;
+}
+
+.side-course{
+  top:487px;
+}
+
+.side-account{
+  top:544px;
+}
+
+/* =========================
+   MAIN PAGE
+========================= */
+
+.page{
+  width:1134px;
+
+  margin-left:164px;
+
+  padding-top:31px;
+  padding-bottom:35px;
+}
+
+/* =========================
+   COMMON IMAGE SECTION
+========================= */
+
+.section-image{
+  position:relative;
+
+  width:1134px;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  height:220px;
+
+  border-radius:23px;
+
   overflow:hidden;
-  pointer-events:none;
+
+  background:
+    url("YOUR_HERO_IMAGE")
+    center/
+    100% 100%
+    no-repeat;
 }
 
-/* Feature decorations: small Japanese motifs, visually quiet. */
-.nm-feature-decoration{
-  opacity:.48;
-  transform:translateY(2px);
-}
-.nm-feature-decoration svg{
-  filter:saturate(.82);
-}
+/* =========================
+   INTRO + RECENT
+========================= */
 
-/* Shortcut icons: unified line weight */
-.nm-shortcut-icon svg{
-  shape-rendering:geometricPrecision;
-}
-.nm-shortcut-icon svg path,
-.nm-shortcut-icon svg rect,
-.nm-shortcut-icon svg circle,
-.nm-shortcut-icon svg ellipse,
-.nm-shortcut-icon svg line,
-.nm-shortcut-icon svg polyline,
-.nm-shortcut-icon svg polygon{
-  vector-effect:non-scaling-stroke;
+.intro-row{
+  display:grid;
+
+  grid-template-columns:
+    740px
+    382px;
+
+  gap:12px;
+
+  margin-top:9px;
 }
 
-/* Japanese typography accents */
-.nm-badge,
-.nm-daily-heading,
-.nm-feature-title{
-  letter-spacing:.01em;
+.intro,
+.recent{
+  height:273px;
+
+  border-radius:18px;
+
+  overflow:hidden;
+
+  background-position:center;
+  background-size:100% 100%;
+  background-repeat:no-repeat;
 }
 
-@media(max-width:760px){
-  .nm-hero-art{border-radius:18px}
+.intro{
+  background-image:
+    url("YOUR_INTRO_IMAGE");
 }
-</style>
 
+.recent{
+  background-image:
+    url("YOUR_RECENT_IMAGE");
+}
 
-<!-- =========================================================
-     HOME
-     ========================================================= -->
+/* =========================
+   MAIN FUNCTIONS
+========================= */
 
-<div class="nm-home">
+.functions{
+  height:243px;
 
-  <!-- =======================================================
-       HEADER
-       ======================================================= -->
+  margin-top:12px;
 
-  <header class="nm-header">
+  background:
+    url("YOUR_FUNCTIONS_IMAGE")
+    center/
+    100% 100%
+    no-repeat;
+}
 
-    <div class="nm-header-inner">
+/* =========================
+   SURVEY
+========================= */
 
-      <!-- LOGO -->
-      <div class="nm-logo">
+.survey{
+  height:230px;
 
-        <div class="nm-logo-symbol">
+  margin-top:12px;
 
-          <svg
-            viewBox="0 0 64 64"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-          >
+  background:
+    url("YOUR_SURVEY_IMAGE")
+    center/
+    100% 100%
+    no-repeat;
+}
 
-            <!-- Graduation cap -->
-            <path
-              d="M7 25L32 13L57 25L32 37L7 25Z"
-              fill="#ff5a1f"
-            />
+/* =========================
+   TRANSPARENT CLICK AREAS
+========================= */
 
-            <path
-              d="M18 31V43C18 48 26 52 32 52C38 52 46 48 46 43V31L32 38L18 31Z"
-              fill="#ff7a42"
-            />
+.hit{
+  position:absolute;
 
-            <path
-              d="M57 25V39"
-              stroke="#ff5a1f"
-              stroke-width="3"
-              stroke-linecap="round"
-            />
+  display:block;
 
-            <circle
-              cx="57"
-              cy="41"
-              r="3"
-              fill="#ff5a1f"
-            />
+  background:transparent;
 
-          </svg>
+  border:0;
 
-        </div>
+  cursor:pointer;
 
-        <div class="nm-logo-text">
+  z-index:5;
+}
 
-          <div class="nm-logo-title">
-            Nihongo Master
-          </div>
+/* Hero */
 
-          <div class="nm-logo-subtitle">
-            Chinh phục tiếng Nhật mỗi ngày!
-          </div>
+.hero-alphabet{
+  left:16px;
+  top:114px;
 
-        </div>
+  width:136px;
+  height:91px;
+}
 
-      </div>
+.hero-test{
+  left:164px;
+  top:114px;
 
+  width:136px;
+  height:91px;
+}
 
-      <!-- NAV -->
-      <nav class="nm-nav">
+/* Main functions */
 
-        <button
-          class="nm-nav-item active"
-          data-route="home"
-        >
-          Trang chủ
-        </button>
+.fn-1{
+  left:0;
+  top:34px;
 
-        <button
-          class="nm-nav-item"
-          data-route="vocabulary"
-        >
-          Từ vựng
-        </button>
+  width:179px;
+  height:207px;
+}
 
-        <button
-          class="nm-nav-item"
-          data-route="kanji"
-        >
-          Kanji
-        </button>
+.fn-2{
+  left:191px;
+  top:34px;
 
-        <button
-          class="nm-nav-item"
-          data-route="grammar"
-        >
-          Ngữ pháp
-        </button>
+  width:179px;
+  height:207px;
+}
 
-        <button
-          class="nm-nav-item"
-          data-route="test"
-        >
-          Bài Test
-        </button>
+.fn-3{
+  left:382px;
+  top:34px;
 
-        <button
-          class="nm-nav-item"
-          data-route="contact"
-        >
-          Liên hệ
-        </button>
+  width:179px;
+  height:207px;
+}
 
-      </nav>
+.fn-4{
+  left:573px;
+  top:34px;
 
+  width:179px;
+  height:207px;
+}
 
-      <!-- ACTIONS -->
-      <div class="nm-header-actions">
+.fn-5{
+  left:764px;
+  top:34px;
 
-        <button
-          class="nm-theme-btn"
-          type="button"
-          aria-label="Đổi giao diện"
-        >
+  width:179px;
+  height:207px;
+}
 
-          <svg
-            class="nm-icon-small"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle
-              cx="12"
-              cy="12"
-              r="4"
-              stroke="currentColor"
-              stroke-width="1.8"
-            />
+.fn-6{
+  left:955px;
+  top:34px;
 
-            <path
-              d="M12 2V4M12 20V22M4.93 4.93L6.34 6.34M17.66 17.66L19.07 19.07M2 12H4M20 12H22M4.93 19.07L6.34 17.66M17.66 6.34L19.07 4.93"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-            />
-          </svg>
+  width:179px;
+  height:207px;
+}
 
-        </button>
+/* Survey */
 
+.survey-before{
+  left:17px;
+  top:30px;
 
-        <button
-          class="nm-auth-btn nm-login"
-          type="button"
-        >
-          Đăng nhập
-        </button>
+  width:223px;
+  height:166px;
+}
 
-        <button
-          class="nm-auth-btn nm-register"
-          type="button"
-        >
-          Đăng ký
-        </button>
+.survey-after{
+  left:489px;
+  top:30px;
 
-      </div>
+  width:224px;
+  height:166px;
+}
 
-    </div>
+.thanks-hit{
+  right:0;
+  top:0;
 
-  </header>
+  width:392px;
+  height:230px;
+}
 
+/* =========================
+   RESPONSIVE
+========================= */
 
-  <!-- =======================================================
-       MAIN
-       ======================================================= -->
+@media(max-width:1200px){
 
-  <main class="nm-main">
+  body::before,
+  body::after,
+  .sidebar{
+    display:none;
+  }
 
-    <div class="nm-container">
+  .page{
+    width:100%;
+    max-width:1134px;
 
+    margin:0 auto;
 
-      <!-- ===================================================
-           HERO
-           =================================================== -->
+    padding:15px;
+  }
 
-      <section class="nm-hero">
+  .section-image{
+    width:100%;
+  }
 
+  .hero{
+    height:auto;
 
-        <!-- Sakura branch LEFT -->
-        <div class="nm-sakura-branch nm-branch-left">
+    aspect-ratio:1134/220;
+  }
 
-          <svg
-            viewBox="0 0 390 170"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+  .intro-row{
+    grid-template-columns:
+      minmax(0,1.937fr)
+      minmax(260px,1fr);
+  }
 
-            <path
-              d="M15 130C120 110 190 76 370 12"
-              fill="none"
-              stroke="#824126"
-              stroke-width="8"
-              stroke-linecap="round"
-            />
+  .intro,
+  .recent{
+    height:auto;
 
-            <path
-              d="M140 88C155 65 168 45 190 28"
-              fill="none"
-              stroke="#824126"
-              stroke-width="5"
-            />
+    aspect-ratio:740/273;
+  }
 
-            <path
-              d="M230 62C242 42 257 27 274 17"
-              fill="none"
-              stroke="#824126"
-              stroke-width="5"
-            />
+  .functions{
+    height:auto;
 
-            <!-- flowers -->
+    aspect-ratio:1134/243;
+  }
 
-            <g transform="translate(160 60)">
-              <circle r="13" fill="#ff9d91"/>
-              <circle cx="0" cy="-8" r="6" fill="#ffb5a9"/>
-              <circle cx="8" cy="-2" r="6" fill="#ffb5a9"/>
-              <circle cx="5" cy="7" r="6" fill="#ffb5a9"/>
-              <circle cx="-5" cy="7" r="6" fill="#ffb5a9"/>
-              <circle cx="-8" cy="-2" r="6" fill="#ffb5a9"/>
-              <circle r="3" fill="#f6b631"/>
-            </g>
+  .survey{
+    height:auto;
 
-            <g transform="translate(215 44)">
-              <circle r="13" fill="#ff9d91"/>
-              <circle cx="0" cy="-8" r="6" fill="#ffb5a9"/>
-              <circle cx="8" cy="-2" r="6" fill="#ffb5a9"/>
-              <circle cx="5" cy="7" r="6" fill="#ffb5a9"/>
-              <circle cx="-5" cy="7" r="6" fill="#ffb5a9"/>
-              <circle cx="-8" cy="-2" r="6" fill="#ffb5a9"/>
-              <circle r="3" fill="#f6b631"/>
-            </g>
+    aspect-ratio:1134/230;
+  }
 
-            <g transform="translate(282 31)">
-              <circle r="12" fill="#ff9d91"/>
-              <circle cx="0" cy="-7" r="5.5" fill="#ffb5a9"/>
-              <circle cx="7" cy="-2" r="5.5" fill="#ffb5a9"/>
-              <circle cx="4" cy="7" r="5.5" fill="#ffb5a9"/>
-              <circle cx="-4" cy="7" r="5.5" fill="#ffb5a9"/>
-              <circle cx="-7" cy="-2" r="5.5" fill="#ffb5a9"/>
-              <circle r="3" fill="#f6b631"/>
-            </g>
-
-          </svg>
-
-        </div>
-
-
-        <!-- Sakura branch RIGHT -->
-        <div class="nm-sakura-branch nm-branch-right">
-
-          <svg
-            viewBox="0 0 390 170"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-
-            <path
-              d="M15 130C120 110 190 76 370 12"
-              fill="none"
-              stroke="#824126"
-              stroke-width="8"
-              stroke-linecap="round"
-            />
-
-            <path
-              d="M140 88C155 65 168 45 190 28"
-              fill="none"
-              stroke="#824126"
-              stroke-width="5"
-            />
-
-            <path
-              d="M230 62C242 42 257 27 274 17"
-              fill="none"
-              stroke="#824126"
-              stroke-width="5"
-            />
-
-            <g transform="translate(160 60)">
-              <circle r="13" fill="#ff9d91"/>
-              <circle cx="0" cy="-8" r="6" fill="#ffb5a9"/>
-              <circle cx="8" cy="-2" r="6" fill="#ffb5a9"/>
-              <circle cx="5" cy="7" r="6" fill="#ffb5a9"/>
-              <circle cx="-5" cy="7" r="6" fill="#ffb5a9"/>
-              <circle cx="-8" cy="-2" r="6" fill="#ffb5a9"/>
-              <circle r="3" fill="#f6b631"/>
-            </g>
-
-            <g transform="translate(230 40)">
-              <circle r="13" fill="#ff9d91"/>
-              <circle cx="0" cy="-8" r="6" fill="#ffb5a9"/>
-              <circle cx="8" cy="-2" r="6" fill="#ffb5a9"/>
-              <circle cx="5" cy="7" r="6" fill="#ffb5a9"/>
-              <circle cx="-5" cy="7" r="6" fill="#ffb5a9"/>
-              <circle cx="-8" cy="-2" r="6" fill="#ffb5a9"/>
-              <circle r="3" fill="#f6b631"/>
-            </g>
-
-          </svg>
-
-        </div>
-
-
-        <!-- HERO TEXT -->
-
-        <div class="nm-hero-content">
-
-          <div class="nm-badge">
-
-            <svg
-              class="nm-icon-small"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M4 8L12 4L20 8L12 12L4 8Z"
-                fill="currentColor"
-              />
-
-              <path
-                d="M7 10V15C7 17 9.5 19 12 19C14.5 19 17 17 17 15V10"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.7"
-              />
-
-              <path
-                d="M20 8V14"
-                stroke="currentColor"
-                stroke-width="1.7"
-                stroke-linecap="round"
-              />
-
-            </svg>
-
-            NIHONGO MASTER FPT
-
-          </div>
-
-
-          <h1 class="nm-hero-title">
-
-            Chinh Phục
-
-            <span>
-              Tiếng Nhật Đỉnh Cao
-            </span>
-
-          </h1>
-
-
-          <p class="nm-hero-description">
-
-            Hệ thống học tập thông minh tích hợp Flashcard,
-            kiểm tra mô phỏng chuẩn kỳ thi, hỗ trợ ôn tập nhỏ
-            (Small test) và học hiệu quả dành riêng cho sinh viên FPT.
-
-          </p>
-
-
-          <div class="nm-hero-buttons">
-
-            <button
-              class="nm-primary-btn"
-              data-route="vocabulary"
-              type="button"
-            >
-
-              <svg
-                class="nm-icon-small"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-
-                <path
-                  d="M12 3C7 3 4 6.5 4 11C4 15.5 7 19 12 21C17 19 20 15.5 20 11C20 6.5 17 3 12 3Z"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.8"
-                />
-
-                <path
-                  d="M12 7V15"
-                  stroke="currentColor"
-                  stroke-width="1.8"
-                  stroke-linecap="round"
-                />
-
-                <path
-                  d="M8 11L12 15L16 11"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.8"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-
-              </svg>
-
-              Bắt đầu học ngay
-
-            </button>
-
-
-            <button
-              class="nm-secondary-btn"
-              data-route="test"
-              type="button"
-            >
-
-              <svg
-                class="nm-icon-small"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-
-                <rect
-                  x="5"
-                  y="3"
-                  width="14"
-                  height="18"
-                  rx="2"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.8"
-                />
-
-                <path
-                  d="M8 8H16M8 12H16M8 16H13"
-                  stroke="currentColor"
-                  stroke-width="1.8"
-                  stroke-linecap="round"
-                />
-
-              </svg>
-
-              Thi thử ngay
-
-            </button>
-
-          </div>
-
-        </div>
-
-
-        <!-- =================================================
-             HERO JAPANESE ILLUSTRATION
-             ================================================= -->
-
-        <div class="nm-hero-art">
-
-          <svg
-            viewBox="0 0 760 500"
-            xmlns="http://www.w3.org/2000/svg"
-            preserveAspectRatio="xMidYMid meet"
-          >
-
-            <defs>
-
-              <linearGradient
-                id="nmSky"
-                x1="0"
-                y1="0"
-                x2="0"
-                y2="1"
-              >
-                <stop
-                  offset="0"
-                  stop-color="#fff1e4"
-                  stop-opacity="0"
-                />
-
-                <stop
-                  offset="1"
-                  stop-color="#ffe1cd"
-                  stop-opacity="0.65"
-                />
-              </linearGradient>
-
-
-              <linearGradient
-                id="nmMountain"
-                x1="0"
-                y1="0"
-                x2="1"
-                y2="1"
-              >
-
-                <stop
-                  offset="0"
-                  stop-color="#567a9e"
-                />
-
-                <stop
-                  offset="1"
-                  stop-color="#3e668c"
-                />
-
-              </linearGradient>
-
-
-              <linearGradient
-                id="nmGround"
-                x1="0"
-                y1="0"
-                x2="0"
-                y2="1"
-              >
-
-                <stop
-                  offset="0"
-                  stop-color="#a0ae7a"
-                />
-
-                <stop
-                  offset="0.52"
-                  stop-color="#879967"
-                />
-
-                <stop
-                  offset="1"
-                  stop-color="#64784f"
-                />
-
-              </linearGradient>
-
-
-              <!--
-                Subtle physically-inspired material gradients.
-                These preserve the exact SVG silhouettes while adding
-                controlled light falloff instead of flat fills.
-              -->
-              <linearGradient
-                id="nmToriiPaint"
-                x1="0"
-                y1="0"
-                x2="1"
-                y2="1"
-              >
-                <stop offset="0" stop-color="#ee5a32"/>
-                <stop offset="0.46" stop-color="#d74322"/>
-                <stop offset="1" stop-color="#9f2f1d"/>
-              </linearGradient>
-
-              <linearGradient
-                id="nmCatWhite"
-                x1="0"
-                y1="0"
-                x2="1"
-                y2="1"
-              >
-                <stop offset="0" stop-color="#fffefa"/>
-                <stop offset="0.56" stop-color="#f8f4ed"/>
-                <stop offset="1" stop-color="#ded3c7"/>
-              </linearGradient>
-
-              <linearGradient
-                id="nmDarumaPaint"
-                x1="0"
-                y1="0"
-                x2="1"
-                y2="1"
-              >
-                <stop offset="0" stop-color="#d84a2d"/>
-                <stop offset="0.52" stop-color="#b93424"/>
-                <stop offset="1" stop-color="#84291d"/>
-              </linearGradient>
-
-              <linearGradient
-                id="nmMountainDepth"
-                x1="0"
-                y1="0"
-                x2="1"
-                y2="1"
-              >
-                <stop offset="0" stop-color="#6888a6"/>
-                <stop offset="0.5" stop-color="#4c7093"/>
-                <stop offset="1" stop-color="#314f70"/>
-              </linearGradient>
-
-              <linearGradient
-                id="nmRoofDepth"
-                x1="0"
-                y1="0"
-                x2="0"
-                y2="1"
-              >
-                <stop offset="0" stop-color="#45454a"/>
-                <stop offset="0.5" stop-color="#29292d"/>
-                <stop offset="1" stop-color="#17171a"/>
-              </linearGradient>
-
-              <!--
-                Softer contact shadow than the original large drop shadow.
-                The goal is a natural light transition, not a CGI outline.
-              -->
-              <filter
-                id="nmShadow"
-                x="-35%"
-                y="-35%"
-                width="170%"
-                height="175%"
-                color-interpolation-filters="sRGB"
-              >
-                <feGaussianBlur
-                  in="SourceAlpha"
-                  stdDeviation="3.2"
-                  result="nmBlur"
-                />
-
-                <feOffset
-                  dx="0"
-                  dy="3.5"
-                  result="nmOffset"
-                />
-
-                <feComponentTransfer>
-                  <feFuncA
-                    type="linear"
-                    slope="0.15"
-                  />
-                </feComponentTransfer>
-
-                <feColorMatrix
-                  type="matrix"
-                  values="
-                    0 0 0 0 0.18
-                    0 0 0 0 0.10
-                    0 0 0 0 0.06
-                    0 0 0 1 0
-                  "
-                />
-
-                <feMerge>
-                  <feMergeNode />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
-
-              <!--
-                Very fine optical grain. It is intentionally low-frequency
-                and low-opacity so the illustration gains micro-contrast
-                without becoming noisy or artificial.
-              -->
-              <filter
-                id="nmFilmTexture"
-                x="-5%"
-                y="-5%"
-                width="110%"
-                height="110%"
-              >
-                <feTurbulence
-                  type="fractalNoise"
-                  baseFrequency="0.72"
-                  numOctaves="2"
-                  seed="17"
-                  result="nmNoise"
-                />
-
-                <feColorMatrix
-                  in="nmNoise"
-                  type="saturate"
-                  values="0"
-                  result="nmGrayNoise"
-                />
-
-                <feComponentTransfer in="nmGrayNoise">
-                  <feFuncA
-                    type="table"
-                    tableValues="0 0.075"
-                  />
-                </feComponentTransfer>
-
-                <feBlend
-                  in="SourceGraphic"
-                  in2="nmGrayNoise"
-                  mode="soft-light"
-                />
-              </filter>
-
-            </defs>
-
-
-            <!-- subtle background -->
-            <rect
-              width="760"
-              height="500"
-              fill="url(#nmSky)"
-            />
-
-            <!-- Fine photographic grain / micro-contrast layer -->
-            <rect
-              width="760"
-              height="500"
-              fill="#ffffff"
-              opacity="0.055"
-              filter="url(#nmFilmTexture)"
-              pointer-events="none"
-            />
-
-
-            <!-- SUN -->
-
-            <circle
-              cx="505"
-              cy="120"
-              r="70"
-              fill="#f04425"
-            />
-
-            <circle
-              cx="505"
-              cy="120"
-              r="78"
-              fill="#ff6840"
-              opacity="0.08"
-            />
-
-
-            <!-- MOUNT FUJI -->
-
-            <path
-              d="
-                M325 365
-                L455 160
-                L585 365
-                Z
-              "
-              fill="url(#nmMountainDepth)"
-            />
-
-            <!-- snow -->
-
-            <path
-              d="
-                M455 160
-                L414 226
-                L435 218
-                L448 236
-                L461 216
-                L480 231
-                L493 220
-                Z
-              "
-              fill="#fffdf9"
-            />
-
-            <!-- mountain highlight -->
-
-            <path
-              d="
-                M455 160
-                L398 365
-                L455 365
-                L455 270
-                L435 218
-                Z
-              "
-              fill="#6f8fac"
-              opacity="0.42"
-            />
-
-
-            <!-- GROUND -->
-
-            <path
-              d="
-                M325 365
-                H585
-                V430
-                H325
-                Z
-              "
-              fill="url(#nmGround)"
-            />
-
-
-            <!-- TORII -->
-
-            <g
-              filter="url(#nmShadow)"
-            >
-
-              <!-- top beam -->
-              <rect
-                x="295"
-                y="260"
-                width="180"
-                height="17"
-                rx="5"
-                fill="url(#nmToriiPaint)"
-              />
-
-              <rect
-                x="306"
-                y="275"
-                width="158"
-                height="18"
-                rx="4"
-                fill="#bd351c"
-              />
-
-              <!-- posts -->
-
-              <rect
-                x="330"
-                y="290"
-                width="20"
-                height="145"
-                rx="3"
-                fill="url(#nmToriiPaint)"
-              />
-
-              <rect
-                x="420"
-                y="290"
-                width="20"
-                height="145"
-                rx="3"
-                fill="url(#nmToriiPaint)"
-              />
-
-              <!-- middle beam -->
-
-              <rect
-                x="315"
-                y="335"
-                width="140"
-                height="16"
-                rx="4"
-                fill="url(#nmToriiPaint)"
-              />
-
-              <!-- bottom -->
-
-              <rect
-                x="300"
-                y="427"
-                width="170"
-                height="15"
-                rx="4"
-                fill="#8f2f1d"
-              />
-
-            </g>
-
-
-            <!-- EMA -->
-
-            <g
-              transform="translate(545 70)"
-              filter="url(#nmShadow)"
-            >
-
-              <line
-                x1="38"
-                y1="-45"
-                x2="38"
-                y2="0"
-                stroke="#8c3c23"
-                stroke-width="4"
-              />
-
-              <path
-                d="
-                  M8 0
-                  L72 7
-                  L67 72
-                  L0 63
-                  Z
-                "
-                fill="#e8a44d"
-                stroke="#b56b29"
-                stroke-width="4"
-              />
-
-              <text
-                x="39"
-                y="43"
-                text-anchor="middle"
-                font-size="21"
-                font-weight="800"
-                fill="#3b271d"
-              >
-                日本語
-              </text>
-
-            </g>
-
-
-            <!-- PAGODA -->
-
-            <g
-              transform="translate(555 225)"
-              filter="url(#nmShadow)"
-            >
-
-              <!-- roof -->
-
-              <path
-                d="
-                  M0 0
-                  L105 0
-                  L132 17
-                  L-28 17
-                  Z
-                "
-                fill="url(#nmRoofDepth)"
-              />
-
-              <path
-                d="
-                  M10 17
-                  L102 17
-                  L122 32
-                  L-15 32
-                  Z
-                "
-                fill="#1f1f23"
-              />
-
-              <!-- building -->
-
-              <rect
-                x="10"
-                y="32"
-                width="90"
-                height="115"
-                rx="2"
-                fill="#c94627"
-              />
-
-              <!-- windows -->
-
-              <rect
-                x="25"
-                y="58"
-                width="18"
-                height="35"
-                rx="3"
-                fill="#292929"
-              />
-
-              <rect
-                x="66"
-                y="58"
-                width="18"
-                height="35"
-                rx="3"
-                fill="#292929"
-              />
-
-              <!-- balcony -->
-
-              <rect
-                x="-2"
-                y="45"
-                width="115"
-                height="9"
-                fill="#262629"
-              />
-
-              <rect
-                x="2"
-                y="99"
-                width="108"
-                height="8"
-                fill="#262629"
-              />
-
-            </g>
-
-
-            <!-- MANEKI NEKO -->
-
-            <g
-              transform="translate(485 270)"
-              filter="url(#nmShadow)"
-            >
-
-              <!-- body -->
-
-              <path
-                d="
-                  M55 55
-                  C25 55 10 85 15 140
-                  C18 180 32 202 60 202
-                  H110
-                  C138 202 150 180 152 140
-                  C155 85 140 55 110 55
-                  Z
-                "
-                fill="url(#nmCatWhite)"
-                stroke="#d5bca5"
-                stroke-width="4"
-              />
-
-              <!-- head -->
-
-              <path
-                d="
-                  M32 65
-                  C30 25 38 4 55 15
-                  L74 31
-                  L98 31
-                  L120 14
-                  C137 3 145 28 142 65
-                  C139 99 117 115 86 115
-                  C55 115 35 99 32 65
-                  Z
-                "
-                fill="url(#nmCatWhite)"
-                stroke="#d5bca5"
-                stroke-width="4"
-              />
-
-              <!-- ears -->
-
-              <path
-                d="
-                  M38 31
-                  L39 6
-                  L60 30
-                "
-                fill="#d9a15f"
-              />
-
-              <path
-                d="
-                  M116 30
-                  L137 7
-                  L136 34
-                "
-                fill="#d9a15f"
-              />
-
-              <!-- eyes -->
-
-              <ellipse
-                cx="62"
-                cy="61"
-                rx="5"
-                ry="7"
-                fill="#49372b"
-              />
-
-              <ellipse
-                cx="112"
-                cy="61"
-                rx="5"
-                ry="7"
-                fill="#49372b"
-              />
-
-              <!-- nose -->
-
-              <path
-                d="
-                  M84 72
-                  C78 68 78 76 84 78
-                  C90 76 90 68 84 72
-                  Z
-                "
-                fill="#e57a52"
-              />
-
-              <!-- mouth -->
-
-              <path
-                d="
-                  M84 78
-                  C84 88 73 89 69 84
-                  M84 78
-                  C84 88 95 89 99 84
-                "
-                fill="none"
-                stroke="#57372b"
-                stroke-width="2.2"
-                stroke-linecap="round"
-              />
-
-              <!-- whiskers -->
-
-              <path
-                d="
-                  M53 73L29 68
-                  M53 80L27 80
-                  M115 73L140 68
-                  M115 80L142 80
-                "
-                stroke="#8c6b55"
-                stroke-width="2"
-                stroke-linecap="round"
-              />
-
-              <!-- raised arm -->
-
-              <path
-                d="
-                  M130 102
-                  C150 84 163 54 155 30
-                  C151 17 137 18 133 31
-                  L124 60
-                  L118 87
-                "
-                fill="url(#nmCatWhite)"
-                stroke="#d5bca5"
-                stroke-width="4"
-              />
-
-              <!-- bell -->
-
-              <circle
-                cx="85"
-                cy="116"
-                r="14"
-                fill="#f2ba34"
-              />
-
-              <path
-                d="M75 116H95"
-                stroke="#a76a13"
-                stroke-width="2"
-              />
-
-              <!-- lucky sign -->
-
-              <rect
-                x="58"
-                y="135"
-                width="57"
-                height="57"
-                rx="8"
-                fill="#efb13a"
-              />
-
-              <text
-                x="86"
-                y="174"
-                text-anchor="middle"
-                font-size="32"
-                font-weight="800"
-                fill="#402719"
-              >
-                合
-              </text>
-
-            </g>
-
-
-            <!-- DARUMA -->
-
-            <g
-              transform="translate(245 375)"
-              filter="url(#nmShadow)"
-            >
-
-              <ellipse
-                cx="50"
-                cy="60"
-                rx="52"
-                ry="67"
-                fill="url(#nmDarumaPaint)"
-                stroke="#8f2e1e"
-                stroke-width="5"
-              />
-
-              <!-- face -->
-
-              <circle
-                cx="33"
-                cy="51"
-                r="10"
-                fill="#fff"
-              />
-
-              <circle
-                cx="67"
-                cy="51"
-                r="10"
-                fill="#fff"
-              />
-
-              <circle
-                cx="33"
-                cy="51"
-                r="5"
-                fill="#222"
-              />
-
-              <circle
-                cx="67"
-                cy="51"
-                r="5"
-                fill="#222"
-              />
-
-              <path
-                d="
-                  M36 83
-                  C45 90 55 90 64 83
-                "
-                fill="none"
-                stroke="#54291e"
-                stroke-width="3"
-                stroke-linecap="round"
-              />
-
-              <path
-                d="
-                  M8 88
-                  Q50 105 92 88
-                "
-                fill="none"
-                stroke="#8f2e1e"
-                stroke-width="4"
-                opacity="0.55"
-              />
-
-            </g>
-
-
-            <!-- small petals -->
-
-            <g
-              fill="#f99d91"
-              opacity="0.75"
-            >
-
-              <circle cx="180" cy="120" r="5"/>
-              <circle cx="205" cy="175" r="4"/>
-              <circle cx="270" cy="95" r="4"/>
-              <circle cx="630" cy="105" r="5"/>
-              <circle cx="680" cy="180" r="4"/>
-              <circle cx="605" cy="190" r="5"/>
-              <circle cx="730" cy="245" r="4"/>
-
-            </g>
-
-          </svg>
-
-        </div>
-
-
-        <!-- BOTTOM DECORATIVE WAVE -->
-
-        <svg
-          class="nm-hero-wave"
-          viewBox="0 0 1440 160"
-          preserveAspectRatio="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-
-          <path
-            d="
-              M0 90
-              C80 45 160 130 240 88
-              C320 45 400 130 480 88
-              C560 45 640 130 720 88
-              C800 45 880 130 960 88
-              C1040 45 1120 130 1200 88
-              C1280 45 1360 130 1440 88
-              L1440 160
-              L0 160
-              Z
-            "
-            fill="#fff0df"
-            opacity="0.72"
-          />
-
-        </svg>
-
-      </section>
-
-
-      <!-- ===================================================
-           FEATURE CARDS
-           =================================================== -->
-
-      <section class="nm-features">
-
-        <div class="nm-feature-grid">
-
-
-          <!-- VOCABULARY -->
-
-          <div
-            class="nm-feature-card"
-            data-route="vocabulary"
-          >
-
-            <div class="nm-feature-top">
-
-              <div class="nm-feature-icon orange">
-
-                <svg
-                  class="nm-icon"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-
-                  <path
-                    d="
-                      M5 4.5
-                      C5 3.67 5.67 3 6.5 3
-                      H19
-                      V19
-                      H6.5
-                      C5.67 19 5 19.67 5 20.5
-                      C5 21.33 5.67 22 6.5 22
-                      H20
-                    "
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.8"
-                    stroke-linecap="round"
-                  />
-
-                  <path
-                    d="
-                      M5 4.5
-                      V20.5
-                    "
-                    stroke="currentColor"
-                    stroke-width="1.8"
-                  />
-
-                  <path
-                    d="
-                      M9 7H16
-                      M9 10H16
-                      M9 13H14
-                    "
-                    stroke="currentColor"
-                    stroke-width="1.6"
-                    stroke-linecap="round"
-                  />
-
-                </svg>
-
-              </div>
-
-              <h2 class="nm-feature-title">
-                Từ vựng & Kanji
-              </h2>
-
-            </div>
-
-
-            <p class="nm-feature-description">
-
-              Hệ thống từ vựng bám sát giáo trình
-              Dekiru Nihongo, flashcard sinh động
-              giúp ghi nhớ nhanh và lâu hơn.
-
-            </p>
-
-
-            <span class="nm-feature-link">
-
-              Khám phá ngay
-
-              <svg
-                class="nm-icon-small"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-
-                <path
-                  d="M5 12H19"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                />
-
-                <path
-                  d="M13 6L19 12L13 18"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-
-              </svg>
-
-            </span>
-
-
-            <!-- Decorative book -->
-
-            <div class="nm-feature-decoration">
-
-              <svg
-                width="105"
-                height="95"
-                viewBox="0 0 105 95"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-
-                <path
-                  d="M20 80L20 25C20 20 25 17 30 18L72 25V82L30 75C25 74 20 76 20 80Z"
-                  fill="#ef5a30"
-                  opacity="0.13"
-                />
-
-                <path
-                  d="M30 25L70 31V79L30 73Z"
-                  fill="#ff754b"
-                  opacity="0.22"
-                />
-
-                <path
-                  d="M38 38H61M38 45H61M38 52H55"
-                  stroke="#e84724"
-                  stroke-width="4"
-                  stroke-linecap="round"
-                  opacity="0.28"
-                />
-
-              </svg>
-
-            </div>
-
-          </div>
-
-
-          <!-- GRAMMAR -->
-
-          <div
-            class="nm-feature-card"
-            data-route="grammar"
-          >
-
-            <div class="nm-feature-top">
-
-              <div class="nm-feature-icon yellow">
-
-                <svg
-                  class="nm-icon"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-
-                  <path
-                    d="
-                      M12 3
-                      L20 8
-                      L12 13
-                      L4 8
-                      Z
-                    "
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.8"
-                    stroke-linejoin="round"
-                  />
-
-                  <path
-                    d="
-                      M7 10
-                      V15
-                      C7 18 10 20 12 20
-                      C14 20 17 18 17 15
-                      V10
-                    "
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.8"
-                  />
-
-                  <path
-                    d="M20 8V14"
-                    stroke="currentColor"
-                    stroke-width="1.8"
-                    stroke-linecap="round"
-                  />
-
-                </svg>
-
-              </div>
-
-              <h2 class="nm-feature-title">
-                Ôn tập Ngữ pháp
-              </h2>
-
-            </div>
-
-
-            <p class="nm-feature-description">
-
-              Tổng hợp cấu trúc ngữ pháp trực quan
-              kèm ví dụ thực tế giúp bạn tự tin
-              trước mỗi kỳ thi.
-
-            </p>
-
-
-            <span class="nm-feature-link">
-
-              Khám phá ngay
-
-              <svg
-                class="nm-icon-small"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-
-                <path
-                  d="M5 12H19"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                />
-
-                <path
-                  d="M13 6L19 12L13 18"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-
-              </svg>
-
-            </span>
-
-
-            <!-- Torii decoration -->
-
-            <div class="nm-feature-decoration">
-
-              <svg
-                width="110"
-                height="105"
-                viewBox="0 0 110 105"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-
-                <rect
-                  x="35"
-                  y="30"
-                  width="8"
-                  height="65"
-                  fill="#e36a2e"
-                  opacity="0.28"
-                />
-
-                <rect
-                  x="67"
-                  y="30"
-                  width="8"
-                  height="65"
-                  fill="#e36a2e"
-                  opacity="0.28"
-                />
-
-                <rect
-                  x="22"
-                  y="22"
-                  width="66"
-                  height="8"
-                  rx="3"
-                  fill="#e36a2e"
-                  opacity="0.32"
-                />
-
-                <rect
-                  x="28"
-                  y="37"
-                  width="54"
-                  height="7"
-                  rx="2"
-                  fill="#e36a2e"
-                  opacity="0.22"
-                />
-
-              </svg>
-
-            </div>
-
-          </div>
-
-
-          <!-- TEST -->
-
-          <div
-            class="nm-feature-card"
-            data-route="test"
-          >
-
-            <div class="nm-feature-top">
-
-              <div class="nm-feature-icon blue">
-
-                <svg
-                  class="nm-icon"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-
-                  <rect
-                    x="5"
-                    y="3"
-                    width="14"
-                    height="18"
-                    rx="3"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.8"
-                  />
-
-                  <path
-                    d="
-                      M9 8H15
-                      M9 12H12
-                    "
-                    stroke="currentColor"
-                    stroke-width="1.8"
-                    stroke-linecap="round"
-                  />
-
-                  <path
-                    d="
-                      M9 16L11 18L15 14
-                    "
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.8"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-
-                </svg>
-
-              </div>
-
-              <h2 class="nm-feature-title">
-                Kiểm tra & Đánh giá
-              </h2>
-
-            </div>
-
-
-            <p class="nm-feature-description">
-
-              Hệ thống bài test trắc nghiệm đa dạng,
-              chấm điểm và phân tích kết quả
-              tự động nhanh chóng.
-
-            </p>
-
-
-            <span class="nm-feature-link blue">
-
-              Khám phá ngay
-
-              <svg
-                class="nm-icon-small"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-
-                <path
-                  d="M5 12H19"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                />
-
-                <path
-                  d="M13 6L19 12L13 18"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-
-              </svg>
-
-            </span>
-
-
-            <!-- Test decoration -->
-
-            <div class="nm-feature-decoration">
-
-              <svg
-                width="125"
-                height="105"
-                viewBox="0 0 125 105"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-
-                <path
-                  d="
-                    M25 75
-                    C25 43 43 25 75 25
-                    C92 25 106 34 112 48
-                  "
-                  fill="none"
-                  stroke="#4387e4"
-                  stroke-width="12"
-                  stroke-linecap="round"
-                  opacity="0.12"
-                />
-
-                <circle
-                  cx="82"
-                  cy="53"
-                  r="22"
-                  fill="#4387e4"
-                  opacity="0.10"
-                />
-
-                <path
-                  d="
-                    M72 53L79 60L93 45
-                  "
-                  fill="none"
-                  stroke="#2878d8"
-                  stroke-width="5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  opacity="0.22"
-                />
-
-              </svg>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- ===================================================
-           DAILY SHORTCUTS
-           =================================================== -->
-
-      <section class="nm-daily">
-
-        <div class="nm-daily-grid">
-
-
-          <!-- TITLE -->
-
-          <div class="nm-daily-heading">
-
-            <div class="nm-daily-flower">
-
-              <svg
-                viewBox="0 0 60 60"
-                width="100%"
-                height="100%"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-
-                <g transform="translate(30 30)">
-
-                  <ellipse
-                    cy="-14"
-                    rx="8"
-                    ry="14"
-                    fill="#ffb3a8"
-                  />
-
-                  <ellipse
-                    transform="rotate(72)"
-                    cy="-14"
-                    rx="8"
-                    ry="14"
-                    fill="#ffb3a8"
-                  />
-
-                  <ellipse
-                    transform="rotate(144)"
-                    cy="-14"
-                    rx="8"
-                    ry="14"
-                    fill="#ffb3a8"
-                  />
-
-                  <ellipse
-                    transform="rotate(216)"
-                    cy="-14"
-                    rx="8"
-                    ry="14"
-                    fill="#ffb3a8"
-                  />
-
-                  <ellipse
-                    transform="rotate(288)"
-                    cy="-14"
-                    rx="8"
-                    ry="14"
-                    fill="#ffb3a8"
-                  />
-
-                  <circle
-                    r="7"
-                    fill="#ffb83d"
-                  />
-
-                </g>
-
-              </svg>
-
-            </div>
-
-            <h3>
-              Học tập mỗi ngày
-            </h3>
-
-          </div>
-
-
-          <!-- TỪ VỰNG -->
-
-          <div
-            class="nm-shortcut"
-            data-route="vocabulary"
-          >
-
-            <div class="nm-shortcut-icon">
-
-              <svg
-                viewBox="0 0 80 80"
-                width="100%"
-                height="100%"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-
-                <ellipse
-                  cx="40"
-                  cy="68"
-                  rx="22"
-                  ry="5"
-                  fill="#e3a46c"
-                  opacity="0.25"
-                />
-
-                <!-- cat -->
-
-                <path
-                  d="
-                    M21 39
-                    L23 20
-                    L35 28
-                    L45 28
-                    L57 20
-                    L59 41
-                    C58 54 51 62 40 62
-                    C29 62 22 54 21 39Z
-                  "
-                  fill="#d98d4c"
-                />
-
-                <!-- hat -->
-
-                <path
-                  d="
-                    M20 28
-                    H60
-                    L57 20
-                    H23
-                    Z
-                  "
-                  fill="#294d67"
-                />
-
-                <path
-                  d="M28 24H52"
-                  stroke="#e8c17b"
-                  stroke-width="3"
-                />
-
-                <!-- book -->
-
-                <path
-                  d="
-                    M25 52
-                    L39 56
-                    L39 68
-                    L25 64
-                    Z
-                  "
-                  fill="#e7a83c"
-                />
-
-                <path
-                  d="
-                    M39 56
-                    L55 52
-                    L55 64
-                    L39 68
-                    Z
-                  "
-                  fill="#f1bd5b"
-                />
-
-                <!-- face -->
-
-                <circle
-                  cx="32"
-                  cy="40"
-                  r="2.5"
-                  fill="#3b2a20"
-                />
-
-                <circle
-                  cx="48"
-                  cy="40"
-                  r="2.5"
-                  fill="#3b2a20"
-                />
-
-                <path
-                  d="M36 47Q40 50 44 47"
-                  fill="none"
-                  stroke="#5d3928"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                />
-
-              </svg>
-
-            </div>
-
-            <div class="nm-shortcut-title">
-              Từ vựng
-            </div>
-
-          </div>
-
-
-          <!-- NGỮ PHÁP -->
-
-          <div
-            class="nm-shortcut"
-            data-route="grammar"
-          >
-
-            <div class="nm-shortcut-icon">
-
-              <svg
-                viewBox="0 0 80 80"
-                width="100%"
-                height="100%"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-
-                <ellipse
-                  cx="40"
-                  cy="68"
-                  rx="21"
-                  ry="5"
-                  fill="#e3a46c"
-                  opacity="0.25"
-                />
-
-                <!-- bunny -->
-
-                <ellipse
-                  cx="32"
-                  cy="23"
-                  rx="7"
-                  ry="18"
-                  fill="#f6d6ca"
-                />
-
-                <ellipse
-                  cx="48"
-                  cy="23"
-                  rx="7"
-                  ry="18"
-                  fill="#f6d6ca"
-                />
-
-                <path
-                  d="
-                    M22 39
-                    C22 28 31 24 40 24
-                    C49 24 58 28 58 39
-                    V52
-                    C58 60 50 65 40 65
-                    C30 65 22 60 22 52Z
-                  "
-                  fill="#fff6f1"
-                />
-
-                <!-- hat -->
-
-                <path
-                  d="
-                    M22 35
-                    H58
-                    V28
-                    H22
-                    Z
-                  "
-                  fill="#35556c"
-                />
-
-                <circle
-                  cx="40"
-                  cy="32"
-                  r="4"
-                  fill="#e3a83c"
-                />
-
-                <!-- face -->
-
-                <circle
-                  cx="33"
-                  cy="42"
-                  r="2.5"
-                  fill="#4a3027"
-                />
-
-                <circle
-                  cx="47"
-                  cy="42"
-                  r="2.5"
-                  fill="#4a3027"
-                />
-
-                <path
-                  d="M36 49Q40 52 44 49"
-                  fill="none"
-                  stroke="#7c4a3d"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                />
-
-              </svg>
-
-            </div>
-
-            <div class="nm-shortcut-title">
-              Ngữ pháp
-            </div>
-
-          </div>
-
-
-          <!-- KANJI -->
-
-          <div
-            class="nm-shortcut"
-            data-route="kanji"
-          >
-
-            <div class="nm-shortcut-icon">
-
-              <svg
-                viewBox="0 0 80 80"
-                width="100%"
-                height="100%"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-
-                <ellipse
-                  cx="40"
-                  cy="69"
-                  rx="22"
-                  ry="5"
-                  fill="#e3a46c"
-                  opacity="0.25"
-                />
-
-                <!-- panda -->
-
-                <circle
-                  cx="40"
-                  cy="40"
-                  r="22"
-                  fill="#f7f7f7"
-                />
-
-                <ellipse
-                  cx="24"
-                  cy="38"
-                  rx="8"
-                  ry="11"
-                  fill="#252525"
-                />
-
-                <ellipse
-                  cx="56"
-                  cy="38"
-                  rx="8"
-                  ry="11"
-                  fill="#252525"
-                />
-
-                <circle
-                  cx="40"
-                  cy="43"
-                  r="6"
-                  fill="#333"
-                />
-
-                <circle
-                  cx="34"
-                  cy="38"
-                  r="3"
-                  fill="white"
-                />
-
-                <circle
-                  cx="46"
-                  cy="38"
-                  r="3"
-                  fill="white"
-                />
-
-                <!-- bamboo -->
-
-                <path
-                  d="
-                    M62 65
-                    C65 52 67 39 63 24
-                  "
-                  stroke="#6f8e55"
-                  stroke-width="5"
-                  fill="none"
-                  stroke-linecap="round"
-                />
-
-                <path
-                  d="
-                    M64 43
-                    L73 37
-                    M64 51
-                    L74 49
-                    M65 33
-                    L72 28
-                  "
-                  stroke="#6f8e55"
-                  stroke-width="4"
-                  stroke-linecap="round"
-                />
-
-              </svg>
-
-            </div>
-
-            <div class="nm-shortcut-title">
-              Kanji
-            </div>
-
-          </div>
-
-
-          <!-- TEST -->
-
-          <div
-            class="nm-shortcut"
-            data-route="test"
-          >
-
-            <div class="nm-shortcut-icon">
-
-              <svg
-                viewBox="0 0 80 80"
-                width="100%"
-                height="100%"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-
-                <ellipse
-                  cx="40"
-                  cy="68"
-                  rx="21"
-                  ry="5"
-                  fill="#e3a46c"
-                  opacity="0.25"
-                />
-
-                <!-- Daruma -->
-
-                <ellipse
-                  cx="40"
-                  cy="43"
-                  rx="22"
-                  ry="26"
-                  fill="#d94725"
-                />
-
-                <ellipse
-                  cx="40"
-                  cy="41"
-                  rx="16"
-                  ry="18"
-                  fill="#fff5e9"
-                />
-
-                <circle
-                  cx="33"
-                  cy="39"
-                  r="4"
-                  fill="#222"
-                />
-
-                <circle
-                  cx="47"
-                  cy="39"
-                  r="4"
-                  fill="#222"
-                />
-
-                <path
-                  d="
-                    M32 49
-                    Q40 55
-                    48 49
-                  "
-                  fill="none"
-                  stroke="#73311f"
-                  stroke-width="2"
-                />
-
-                <circle
-                  cx="40"
-                  cy="24"
-                  r="5"
-                  fill="#e5a735"
-                />
-
-                <path
-                  d="
-                    M27 58
-                    H53
-                  "
-                  stroke="#9f321f"
-                  stroke-width="3"
-                  opacity="0.6"
-                />
-
-              </svg>
-
-            </div>
-
-            <div class="nm-shortcut-title">
-              Bài Test
-            </div>
-
-          </div>
-
-
-          <!-- NGHE DOC -->
-
-          <div
-            class="nm-shortcut"
-            data-route="reading"
-          >
-
-            <div class="nm-shortcut-icon">
-
-              <svg
-                viewBox="0 0 80 80"
-                width="100%"
-                height="100%"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-
-                <ellipse
-                  cx="40"
-                  cy="68"
-                  rx="22"
-                  ry="5"
-                  fill="#e3a46c"
-                  opacity="0.25"
-                />
-
-                <!-- rabbit -->
-
-                <ellipse
-                  cx="29"
-                  cy="23"
-                  rx="6"
-                  ry="17"
-                  fill="#f3c8c4"
-                />
-
-                <ellipse
-                  cx="51"
-                  cy="23"
-                  rx="6"
-                  ry="17"
-                  fill="#f3c8c4"
-                />
-
-                <circle
-                  cx="40"
-                  cy="43"
-                  r="20"
-                  fill="#fffaf6"
-                />
-
-                <!-- headphones -->
-
-                <path
-                  d="
-                    M21 44
-                    C21 20 59 20 59 44
-                  "
-                  fill="none"
-                  stroke="#4d4f54"
-                  stroke-width="5"
-                />
-
-                <rect
-                  x="18"
-                  y="40"
-                  width="8"
-                  height="17"
-                  rx="4"
-                  fill="#4d4f54"
-                />
-
-                <rect
-                  x="54"
-                  y="40"
-                  width="8"
-                  height="17"
-                  rx="4"
-                  fill="#4d4f54"
-                />
-
-                <!-- laptop -->
-
-                <path
-                  d="
-                    M29 52
-                    H51
-                    V62
-                    H29
-                    Z
-                  "
-                  fill="#9b9da0"
-                />
-
-                <path
-                  d="
-                    M25 62
-                    H55
-                  "
-                  stroke="#6e7073"
-                  stroke-width="3"
-                  stroke-linecap="round"
-                />
-
-                <!-- face -->
-
-                <circle
-                  cx="34"
-                  cy="42"
-                  r="2"
-                  fill="#473027"
-                />
-
-                <circle
-                  cx="46"
-                  cy="42"
-                  r="2"
-                  fill="#473027"
-                />
-
-              </svg>
-
-            </div>
-
-            <div class="nm-shortcut-title">
-              Nghe & Đọc
-            </div>
-
-          </div>
-
-
-          <!-- NOI -->
-
-          <div
-            class="nm-shortcut"
-            data-route="speaking"
-          >
-
-            <div class="nm-shortcut-icon">
-
-              <svg
-                viewBox="0 0 80 80"
-                width="100%"
-                height="100%"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-
-                <ellipse
-                  cx="40"
-                  cy="68"
-                  rx="22"
-                  ry="5"
-                  fill="#e3a46c"
-                  opacity="0.25"
-                />
-
-                <!-- fox -->
-
-                <path
-                  d="
-                    M19 34
-                    L22 18
-                    L34 26
-                    L46 26
-                    L58 18
-                    L61 35
-                    C61 51 52 61 40 61
-                    C28 61 19 51 19 34Z
-                  "
-                  fill="#dc8b42"
-                />
-
-                <!-- headband -->
-
-                <path
-                  d="
-                    M21 29
-                    H59
-                    V36
-                    H21
-                    Z
-                  "
-                  fill="#314d63"
-                />
-
-                <!-- face -->
-
-                <circle
-                  cx="32"
-                  cy="40"
-                  r="2.5"
-                  fill="#38271f"
-                />
-
-                <circle
-                  cx="48"
-                  cy="40"
-                  r="2.5"
-                  fill="#38271f"
-                />
-
-                <path
-                  d="M35 49Q40 53 45 49"
-                  fill="none"
-                  stroke="#633a29"
-                  stroke-width="1.8"
-                  stroke-linecap="round"
-                />
-
-                <!-- microphone -->
-
-                <rect
-                  x="49"
-                  y="50"
-                  width="8"
-                  height="16"
-                  rx="4"
-                  fill="#60656a"
-                />
-
-                <path
-                  d="
-                    M45 58
-                    C45 66 61 66 61 58
-                  "
-                  fill="none"
-                  stroke="#60656a"
-                  stroke-width="2"
-                />
-
-              </svg>
-
-            </div>
-
-            <div class="nm-shortcut-title">
-              Nói & Luyện tập
-            </div>
-
-          </div>
-
-
-          <!-- CULTURE -->
-
-          <div
-            class="nm-shortcut"
-            data-route="culture"
-          >
-
-            <div class="nm-shortcut-icon">
-
-              <svg
-                viewBox="0 0 80 80"
-                width="100%"
-                height="100%"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-
-                <circle
-                  cx="40"
-                  cy="40"
-                  r="32"
-                  fill="#ff6a2d"
-                />
-
-                <path
-                  d="
-                    M19 33
-                    H61
-                    L54 28
-                    H26
-                    Z
-                  "
-                  fill="#6c281b"
-                />
-
-                <rect
-                  x="27"
-                  y="33"
-                  width="5"
-                  height="22"
-                  fill="#6c281b"
-                />
-
-                <rect
-                  x="48"
-                  y="33"
-                  width="5"
-                  height="22"
-                  fill="#6c281b"
-                />
-
-                <rect
-                  x="23"
-                  y="55"
-                  width="34"
-                  height="5"
-                  fill="#6c281b"
-                />
-
-                <rect
-                  x="24"
-                  y="39"
-                  width="32"
-                  height="5"
-                  fill="#6c281b"
-                />
-
-                <circle
-                  cx="48"
-                  cy="51"
-                  r="10"
-                  fill="#ff9a58"
-                  opacity="0.35"
-                />
-
-              </svg>
-
-            </div>
-
-            <div class="nm-shortcut-title">
-              Văn hóa Nhật Bản
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-    </div>
-
-  </main>
-
-</div>
-
-
-<script>
-  /* =========================================================
-     HOME INITIALIZATION
-     ========================================================= */
-
-  function viewInit() {
-
-    window.scrollTo({
-      top: 0,
-      behavior: "instant"
-    });
-
-    /*
-     * Không tạo ảnh bằng JavaScript.
-     * Toàn bộ illustration và icon đều là inline SVG,
-     * vì vậy không xảy ra lỗi broken image.
-     */
-
-    const homeRoot = document.querySelector(".nm-home");
-
-    if (!homeRoot) {
-      return;
-    }
-
-    /*
-     * Hiệu ứng nhẹ khi hover feature cards.
-     * Không dùng animation quá mạnh để giữ giao diện
-     * sạch và giống phong cách website giáo dục.
-     */
-
-    const featureCards =
-      homeRoot.querySelectorAll(".nm-feature-card");
-
-    featureCards.forEach(function(card) {
-
-      card.addEventListener("mouseenter", function() {
-
-        card.style.transition =
-          "transform .25s ease, box-shadow .25s ease, border-color .25s ease";
-
-      });
-
-    });
-
-
-    /*
-     * Shortcut cards.
-     * data-route được giữ nguyên để hệ thống router hiện tại
-     * của website có thể xử lý.
-     */
-
-    const shortcuts =
-      homeRoot.querySelectorAll(
-        "[data-route]"
+  .hit{
+    transform:
+      scale(
+        calc(100vw / 1134)
       );
 
-    shortcuts.forEach(function(item) {
+    transform-origin:
+      top left;
+  }
+}
 
-      item.addEventListener("keydown", function(event) {
+/* =========================
+   MOBILE
+========================= */
 
-        if (
-          event.key === "Enter" ||
-          event.key === " "
-        ) {
+@media(max-width:760px){
 
-          event.preventDefault();
+  .page{
+    padding:8px;
+  }
 
-          item.click();
+  .intro-row{
+    grid-template-columns:1fr;
+  }
 
-        }
+  .recent{
+    aspect-ratio:382/273;
+  }
 
-      });
+  .hero{
+    min-height:220px;
+  }
 
-    });
+  .functions,
+  .survey{
+    min-height:180px;
+
+    overflow:hidden;
+  }
+}
+</style>
+</head>
+
+
+<body>
+
+<!-- ======================================
+     SIDEBAR
+====================================== -->
+
+<aside
+  class="sidebar"
+  aria-label="Điều hướng"
+>
+
+  <a
+    class="side-hit side-home"
+    href="#home"
+    aria-label="Trang chủ">
+  </a>
+
+  <a
+    class="side-hit side-grammar"
+    href="#grammar"
+    aria-label="Ngữ pháp">
+  </a>
+
+  <a
+    class="side-hit side-vocab"
+    href="#vocabulary"
+    aria-label="Từ vựng">
+  </a>
+
+  <a
+    class="side-hit side-kanji"
+    href="#kanji"
+    aria-label="Kanji">
+  </a>
+
+  <a
+    class="side-hit side-test"
+    href="#test"
+    aria-label="Kiểm tra">
+  </a>
+
+  <a
+    class="side-hit side-video"
+    href="#video"
+    aria-label="Video">
+  </a>
+
+  <a
+    class="side-hit side-speaking"
+    href="#speaking"
+    aria-label="Speaking">
+  </a>
+
+  <a
+    class="side-hit side-course"
+    href="#courses"
+    aria-label="Học phần">
+  </a>
+
+  <a
+    class="side-hit side-account"
+    href="#account"
+    aria-label="Tài khoản">
+  </a>
+
+</aside>
+
+
+<!-- ======================================
+     MAIN CONTENT
+====================================== -->
+
+<main class="page">
+
+  <!-- =========================
+       HERO
+  ========================== -->
+
+  <section
+    id="home"
+    class="section-image hero"
+    aria-label="J-DEKI GO"
+  >
+
+    <button
+      class="hit hero-alphabet"
+      onclick="openFeature('alphabet')"
+      aria-label="Bảng chữ cái">
+    </button>
+
+    <button
+      class="hit hero-test"
+      onclick="openFeature('test')"
+      aria-label="Kiểm tra ngay">
+    </button>
+
+  </section>
+
+
+  <!-- =========================
+       INTRO
+  ========================== -->
+
+  <section class="intro-row">
+
+    <div
+      class="intro section-image"
+      aria-label="Giới thiệu">
+    </div>
+
+
+    <div
+      id="courses"
+      class="recent section-image"
+      aria-label="Học phần gần đây">
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       MAIN FUNCTIONS
+  ========================== -->
+
+  <section
+    id="grammar"
+    class="section-image functions"
+    aria-label="Chức năng chính"
+  >
+
+    <a
+      class="hit fn-1"
+      href="#grammar"
+      aria-label="Ngữ pháp">
+    </a>
+
+    <a
+      class="hit fn-2"
+      href="#vocabulary"
+      aria-label="Từ vựng">
+    </a>
+
+    <a
+      class="hit fn-3"
+      href="#kanji"
+      aria-label="Kanji">
+    </a>
+
+    <a
+      class="hit fn-4"
+      href="#video"
+      aria-label="Video">
+    </a>
+
+    <a
+      class="hit fn-5"
+      href="#speaking"
+      aria-label="Speaking">
+    </a>
+
+    <a
+      class="hit fn-6"
+      href="#courses"
+      aria-label="Học phần">
+    </a>
+
+  </section>
+
+
+  <!-- =========================
+       SURVEY
+  ========================== -->
+
+  <section
+    id="test"
+    class="section-image survey"
+    aria-label="Khảo sát"
+  >
+
+    <button
+      class="hit survey-before"
+      onclick="goToSurvey('before')"
+      aria-label="Khảo sát trước khi sử dụng">
+    </button>
+
+
+    <button
+      class="hit survey-after"
+      onclick="goToSurvey('after')"
+      aria-label="Khảo sát sau khi sử dụng">
+    </button>
+
+
+    <button
+      class="hit thanks-hit"
+      onclick="openFeature('thanks')"
+      aria-label="Cảm ơn bạn">
+    </button>
+
+  </section>
+
+
+  <!-- =========================
+       NAVIGATION TARGETS
+  ========================== -->
+
+  <span id="vocabulary"></span>
+
+  <span id="kanji"></span>
+
+  <span id="video"></span>
+
+  <span id="speaking"></span>
+
+  <span id="account"></span>
+
+</main>
+
+
+<!-- ======================================
+     JAVASCRIPT
+====================================== -->
+
+<script>
+
+/*
+ * ================================
+ * FEATURE NAVIGATION
+ * ================================
+ *
+ * Nếu bạn đang dùng Google Apps Script,
+ * thay phần console.log bằng function
+ * điều hướng hiện tại của bạn.
+ */
+
+function openFeature(name){
+
+  console.log(
+    "J-DEKI GO:",
+    name
+  );
+
+}
+
+
+/*
+ * ================================
+ * SURVEY
+ * ================================
+ *
+ * Thay URL bằng Google Form thực tế.
+ */
+
+function goToSurvey(type){
+
+  const urls = {
+
+    before: "",
+
+    after: ""
+
+  };
+
+
+  if(urls[type]){
+
+    window.open(
+      urls[type],
+      "_blank"
+    );
+
+  }else{
+
+    console.log(
+      "Survey:",
+      type
+    );
 
   }
+
+}
+
 </script>
+
+</body>
+</html>

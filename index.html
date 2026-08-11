@@ -1,498 +1,2417 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>J-DEKI GO - Ôn tập Tiếng Nhật</title>
-    
-    <!-- Tích hợp Font chữ Bo tròn kiểu Nhật (M PLUS Rounded) và Nunito -->
-    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Tích hợp FontAwesome Icon (Đảm bảo icon không bị lỗi) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        /* === CÀI ĐẶT CHUNG === */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Nunito', 'M PLUS Rounded 1c', sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        /* Hình nền toàn trang (Hoa anh đào mờ ảo, tươi sáng) */
-        body {
-            /* Sử dụng ảnh hoa anh đào làm nền */
-            background-image: url('https://images.unsplash.com/photo-1522283660083-d48ee1bb5724?q=80&w=2000&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            display: flex;
-            height: 100vh;
-            padding: 15px;
-            overflow: hidden;
-            position: relative;
-        }
+  <title>J-DEKI GO</title>
 
-        /* Lớp phủ màu trắng hồng để làm dịu background, giúp chữ nổi bật */
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: rgba(255, 248, 246, 0.85); /* Màu trắng hồng mờ */
-            backdrop-filter: blur(3px);
-            z-index: 0;
-        }
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-        /* === THANH SIDEBAR BÊN TRÁI === */
-        .sidebar {
-            position: relative;
-            z-index: 10;
-            width: 100px;
-            background-color: #ffffff;
-            border-radius: 25px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 25px 0;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            margin-right: 25px;
-            border: 2px solid #fff;
-        }
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 
-        .logo {
-            width: 55px;
-            height: 55px;
-            background: linear-gradient(135deg, #ff8c00, #ff5e00);
-            color: white;
-            font-size: 26px;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 18px;
-            margin-bottom: 35px;
-            box-shadow: 0 4px 15px rgba(255, 94, 0, 0.4);
-        }
+  <style>
+    /* =========================================================
+       RESET
+    ========================================================= */
 
-        .nav-menu {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            width: 100%;
-            align-items: center;
-            flex: 1;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 75px;
-            height: 75px;
-            border-radius: 20px;
-            text-decoration: none;
-            color: #a0a0a0;
-            transition: all 0.3s ease;
-            gap: 6px;
-        }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        .nav-item span {
-            font-size: 12px;
-            font-weight: 800;
-        }
+    body {
+      font-family: "Inter", "Noto Sans JP", sans-serif;
+      background: #fffdf9;
+      color: #333333;
+      overflow-x: hidden;
+    }
 
-        .nav-item i {
-            font-size: 24px;
-        }
+    button,
+    a {
+      font-family: inherit;
+    }
 
-        .nav-item.active {
-            background: linear-gradient(135deg, #ff8c00, #ff5e00);
-            color: white;
-            box-shadow: 0 6px 15px rgba(255, 94, 0, 0.35);
-        }
+    button {
+      border: none;
+      cursor: pointer;
+    }
 
-        .nav-item:hover:not(.active) {
-            background-color: #fff0e6;
-            color: #ff5e00;
-            transform: translateY(-2px);
-        }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-        .user-profile {
-            margin-top: auto;
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            border: 2.5px solid #ff5e00;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ff5e00;
-            font-size: 22px;
-            background-color: #fff;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .user-profile:hover {
-            background-color: #ff5e00;
-            color: white;
-        }
+    /* =========================================================
+       JAPANESE BACKGROUND
+    ========================================================= */
 
-        /* === KHU VỰC NỘI DUNG CHÍNH === */
-        .main-content {
-            position: relative;
-            z-index: 10;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-            padding-right: 10px;
-        }
+    .page-background {
+      position: fixed;
+      inset: 0;
+      z-index: -20;
+      overflow: hidden;
+      background:
+        radial-gradient(
+          circle at 20% 20%,
+          rgba(255, 101, 0, .035),
+          transparent 28%
+        ),
+        #fffdf9;
+    }
 
-        /* Thanh cuộn siêu đẹp */
-        .main-content::-webkit-scrollbar { width: 8px; }
-        .main-content::-webkit-scrollbar-track { background: transparent; }
-        .main-content::-webkit-scrollbar-thumb { background: #ffbc99; border-radius: 10px; }
-        .main-content::-webkit-scrollbar-thumb:hover { background: #ff5e00; }
+    .wave-pattern {
+      position: absolute;
+      inset: 0;
+      opacity: .13;
+      background-image:
+        radial-gradient(
+          ellipse at center,
+          transparent 0 42%,
+          #c9bba9 43% 45%,
+          transparent 46%
+        );
+      background-size: 90px 55px;
+    }
 
-        /* --- BANNER (ĐƯỜNG PHỐ NHẬT BẢN) --- */
-        .banner {
-            position: relative;
-            width: 100%;
-            height: 280px;
-            border-radius: 30px;
-            overflow: hidden;
-            padding: 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-            /* Hình ảnh đường phố/đền thờ Nhật Bản rực rỡ */
-            background: url('https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=1200&auto=format&fit=crop') center 60% / cover no-repeat;
-        }
+    .sakura {
+      position: absolute;
+      font-size: 42px;
+      opacity: .25;
+      color: #e85c63;
+      animation: sakuraFloat 9s ease-in-out infinite;
+      pointer-events: none;
+    }
 
-        /* Lớp màng đen gradient mờ để làm nổi bật chữ trắng */
-        .banner::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.6) 100%);
-            z-index: 1;
-        }
+    .sakura.s1 {
+      left: -8px;
+      top: 20px;
+    }
 
-        .banner-content {
-            position: relative;
-            z-index: 2;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
+    .sakura.s2 {
+      right: 30px;
+      top: 110px;
+      font-size: 32px;
+      animation-delay: 1.5s;
+    }
 
-        .badge {
-            background: linear-gradient(135deg, #ff8c00, #ff5e00);
-            color: white;
-            padding: 6px 14px;
-            border-radius: 10px;
-            font-size: 13px;
-            font-weight: 800;
-            display: inline-block;
-            width: max-content;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 10px rgba(255, 94, 0, 0.4);
-        }
+    .sakura.s3 {
+      left: 45px;
+      bottom: 110px;
+      font-size: 48px;
+      animation-delay: 2.5s;
+    }
 
-        .banner h1 {
-            font-size: 40px;
-            font-weight: 800;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
-            letter-spacing: 0.5px;
-        }
+    .sakura.s4 {
+      right: 10px;
+      bottom: 80px;
+      font-size: 54px;
+      animation-delay: 4s;
+    }
 
-        /* 2 NÚT BẤM TRÊN BANNER */
-        .action-buttons {
-            display: flex;
-            gap: 18px;
-            margin-top: 15px;
-        }
+    .red-decoration {
+      position: absolute;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      background:
+        radial-gradient(
+          circle,
+          rgba(220, 40, 45, .20),
+          rgba(220, 40, 45, 0) 68%
+        );
+    }
 
-        .btn {
-            background-color: white;
-            padding: 12px 25px 12px 12px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            text-decoration: none;
-            color: #ff5e00;
-            font-weight: 800;
-            font-size: 16px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
+    .red-decoration.left {
+      left: -90px;
+      bottom: -50px;
+    }
 
-        .btn:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.3);
-        }
+    .red-decoration.right {
+      right: -100px;
+      top: 35%;
+    }
 
-        .btn .icon-bg {
-            width: 45px;
-            height: 45px;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-        }
+    @keyframes sakuraFloat {
+      0%, 100% {
+        transform: translateY(0) rotate(0);
+      }
+      50% {
+        transform: translateY(14px) rotate(8deg);
+      }
+    }
 
-        /* Nút Bảng chữ cái */
-        .btn-blue .icon-bg { 
-            background-color: #e8f4ff; 
-            color: #0088ff; 
-        }
-        
-        /* Nút Kiểm tra ngay */
-        .btn-red .icon-bg { 
-            background-color: #ffeaea; 
-            color: #ff4444; 
-        }
-        
-        .arrow-icon {
-            color: #ffbc99;
-            font-size: 14px;
-            margin-left: 10px;
-        }
+    /* =========================================================
+       APP LAYOUT
+    ========================================================= */
 
-        /* Hộp mờ bên phải banner (Glassmorphism) */
-        .banner-right-box {
-            position: relative;
-            z-index: 2;
-            width: 480px;
-            height: 200px;
-            background: rgba(30, 30, 30, 0.4);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1.5px solid rgba(255,255,255,0.25);
-            border-radius: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
+    .app {
+      min-height: 100vh;
+      display: flex;
+      position: relative;
+    }
 
-        /* --- PHẦN GRID (LƯỚI NỘI DUNG) --- */
-        .content-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 25px;
-        }
+    /* =========================================================
+       SIDEBAR
+    ========================================================= */
 
-        .card {
-            background-color: #ffffff;
-            border-radius: 30px;
-            padding: 35px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-            position: relative;
-            overflow: hidden;
-            border: 1px solid #fff3eb;
-        }
+    .sidebar {
+      width: 96px;
+      min-width: 96px;
+      height: calc(100vh - 30px);
+      position: fixed;
+      left: 15px;
+      top: 15px;
+      z-index: 100;
+      background: rgba(255,255,255,.94);
+      border: 1px solid rgba(255,101,0,.12);
+      border-radius: 25px;
+      box-shadow: 0 10px 35px rgba(73, 52, 31, .08);
+      padding: 14px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      backdrop-filter: blur(12px);
+    }
 
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: #ff5e00;
-            font-weight: 800;
-            font-size: 15px;
-            text-transform: uppercase;
-            margin-bottom: 25px;
-            letter-spacing: 1px;
-        }
-        
-        .card-header i { font-size: 20px; }
+    .logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      background: #ff6500;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 23px;
+      font-weight: 800;
+      margin-bottom: 15px;
+      box-shadow: 0 8px 18px rgba(255,101,0,.20);
+    }
 
-        /* Card Giới Thiệu */
-        .intro-title {
-            font-size: 22px;
-            font-weight: 800;
-            color: #1a1a1a;
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
+    .nav {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      flex: 1;
+    }
 
-        .intro-desc-1 {
-            border-left: 4px solid #ff5e00;
-            padding-left: 20px;
-            color: #444;
-            font-size: 16px;
-            line-height: 1.7;
-            margin-bottom: 20px;
-            font-weight: 700;
-            background-color: #fff9f5;
-            padding: 15px 15px 15px 20px;
-            border-radius: 0 15px 15px 0;
-        }
+    .nav-item {
+      position: relative;
+      width: 100%;
+      min-height: 57px;
+      border-radius: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      color: #666;
+      transition:
+        transform .2s ease,
+        background .2s ease,
+        color .2s ease,
+        box-shadow .2s ease;
+    }
 
-        .intro-desc-2 {
-            color: #666;
-            font-size: 15.5px;
-            line-height: 1.8;
-            max-width: 65%; /* Chừa chỗ cho chú mèo */
-            font-weight: 600;
-        }
+    .nav-item svg {
+      width: 21px;
+      height: 21px;
+      stroke-width: 2;
+    }
 
-        .intro-desc-2 strong {
-            color: #ff5e00;
-            font-weight: 800;
-        }
+    .nav-item span {
+      font-size: 9px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
 
-        /* ẢNH CHÚ MÈO THẦN TÀI (Được căn góc chuẩn như thiết kế) */
-        .mascot-img {
-            position: absolute;
-            right: -10px;
-            bottom: -15px;
-            width: 320px; /* Chỉnh kích thước to rõ */
-            height: auto;
-            z-index: 5;
-            pointer-events: none; /* Không cho click đè lên chữ */
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
-            /* Dùng ảnh vector nét căng của Mèo may mắn Nhật Bản */
-            content: url('https://cdn.pixabay.com/photo/2024/02/26/16/23/cat-8598379_1280.png');
-        }
+    .nav-item:hover {
+      background: #fff1e8;
+      color: #ff6500;
+      transform: translateY(-1px);
+    }
 
-        /* Card Học Phần Gần Đây */
-        .recent-card {
-            display: flex;
-            flex-direction: column;
-        }
+    .nav-item.active {
+      color: white;
+      background: #ff6500;
+      box-shadow: 0 7px 17px rgba(255,101,0,.22);
+    }
 
-        .empty-state {
-            background-color: #fffaf6;
-            border: 2px dashed #ffdac2;
-            border-radius: 20px;
-            padding: 40px 20px;
-            text-align: center;
-            color: #a89f98;
-            font-size: 15px;
-            font-weight: 700;
-            margin-top: 10px;
-            transition: 0.3s;
-        }
-        .empty-state:hover {
-            background-color: #fff5ed;
-            border-color: #ffbc99;
-            color: #ff5e00;
-        }
+    .nav-item.active:hover {
+      background: #e95300;
+      color: white;
+    }
 
-    </style>
+    .nav-home {
+      color: #ff6500;
+    }
+
+    .nav-grammar {
+      color: #7437e8;
+    }
+
+    .nav-vocab {
+      color: #00a878;
+    }
+
+    .nav-kanji {
+      color: #c85a00;
+    }
+
+    .nav-test {
+      color: #ff4b50;
+    }
+
+    .nav-video {
+      color: #00b8d9;
+    }
+
+    .nav-speaking {
+      color: #ff6500;
+    }
+
+    .nav-course {
+      color: #c7c900;
+    }
+
+    .nav-user {
+      color: #ff6500;
+    }
+
+    .nav-item.active {
+      color: white !important;
+    }
+
+    .sidebar-bottom {
+      width: 100%;
+      padding-top: 8px;
+      border-top: 1px solid #f1e8df;
+    }
+
+    /* =========================================================
+       MAIN
+    ========================================================= */
+
+    .main {
+      width: calc(100% - 96px);
+      margin-left: 96px;
+      padding: 18px 18px 40px 70px;
+      min-width: 0;
+    }
+
+    .content {
+      width: 100%;
+      max-width: 1360px;
+      margin: 0 auto;
+    }
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+
+    .hero {
+      height: 220px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 23px;
+      border: 1px solid rgba(255,255,255,.75);
+      box-shadow: 0 10px 30px rgba(54,40,26,.13);
+      background:
+        linear-gradient(
+          90deg,
+          rgba(45,24,18,.80) 0%,
+          rgba(45,24,18,.47) 48%,
+          rgba(45,24,18,.15) 100%
+        ),
+        url("https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=1600&q=85")
+        center/cover;
+      display: flex;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(35,17,10,.76),
+          rgba(35,17,10,.15)
+        );
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: 53%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hero-badge {
+      width: fit-content;
+      padding: 6px 13px;
+      border-radius: 8px;
+      background: #ff6500;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .3px;
+      margin-bottom: 8px;
+    }
+
+    .hero-title {
+      color: white;
+      font-size: clamp(27px, 3vw, 34px);
+      line-height: 1.12;
+      font-weight: 800;
+      margin-bottom: 22px;
+      text-shadow: 0 3px 12px rgba(0,0,0,.28);
+    }
+
+    .quick-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .quick-card {
+      min-width: 135px;
+      height: 82px;
+      padding: 12px;
+      background: rgba(255,255,255,.97);
+      border-radius: 17px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 7px 20px rgba(0,0,0,.15);
+      transition: transform .2s ease;
+    }
+
+    .quick-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .quick-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .quick-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .quick-icon.blue {
+      color: #009de0;
+      background: #dff5ff;
+    }
+
+    .quick-icon.red {
+      color: #ff4045;
+      background: #ffe4e5;
+    }
+
+    .quick-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .quick-arrow {
+      color: #ff6500;
+      font-size: 21px;
+    }
+
+    .quick-title {
+      color: #ff6500;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .hero-character {
+      position: absolute;
+      z-index: 3;
+      right: 15px;
+      top: 15px;
+      bottom: 15px;
+      width: 39%;
+      border-radius: 23px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.65);
+      background:
+        linear-gradient(
+          135deg,
+          #53658e,
+          #d5e5ff 45%,
+          #26324c
+        );
+      box-shadow: 0 7px 24px rgba(0,0,0,.20);
+    }
+
+    .hero-character img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .character-placeholder {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 30px;
+      background:
+        radial-gradient(
+          circle at 50% 35%,
+          rgba(255,255,255,.75),
+          transparent 13%
+        ),
+        linear-gradient(
+          145deg,
+          #344b70,
+          #c8d8ee 42%,
+          #161c2c
+        );
+    }
+
+    /* =========================================================
+       SECTION HEADER
+    ========================================================= */
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 12px 0 9px;
+      color: #ff6500;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+    }
+
+    .section-header svg {
+      width: 17px;
+      height: 17px;
+    }
+
+    /* =========================================================
+       INTRO AREA
+    ========================================================= */
+
+    .intro-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(280px, .8fr);
+      gap: 12px;
+    }
+
+    .intro-card,
+    .recent-card {
+      min-height: 272px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.96);
+      border: 1px solid #ffd7bd;
+      box-shadow: 0 5px 22px rgba(74,50,30,.045);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .intro-card {
+      padding: 18px 20px;
+    }
+
+    .intro-card .section-header {
+      margin: 0 0 9px;
+    }
+
+    .intro-title {
+      max-width: 78%;
+      font-family: "Noto Sans JP", sans-serif;
+      font-size: 19px;
+      line-height: 1.35;
+      font-weight: 800;
+      color: #333;
+      margin-bottom: 9px;
+    }
+
+    .intro-subtitle {
+      max-width: 77%;
+      border-left: 3px solid #ff6500;
+      padding-left: 10px;
+      color: #666;
+      font-size: 12px;
+      line-height: 1.6;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    .intro-text {
+      max-width: 77%;
+      font-size: 12px;
+      line-height: 1.75;
+      color: #555;
+    }
+
+    .intro-text p + p {
+      margin-top: 8px;
+    }
+
+    .orange-text {
+      color: #ff6500;
+      font-weight: 800;
+    }
+
+    .intro-illustration {
+      position: absolute;
+      right: 12px;
+      bottom: 0;
+      width: 30%;
+      height: 92%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .cat-art {
+      position: relative;
+      width: 170px;
+      height: 200px;
+    }
+
+    .mountain {
+      position: absolute;
+      right: 5px;
+      bottom: 22px;
+      width: 110px;
+      height: 75px;
+      background:
+        linear-gradient(
+          135deg,
+          transparent 48%,
+          #7ab0d8 49% 72%,
+          transparent 73%
+        );
+      opacity: .8;
+    }
+
+    .cat-body {
+      position: absolute;
+      left: 43px;
+      bottom: 18px;
+      width: 88px;
+      height: 92px;
+      background: #e7a329;
+      border-radius: 48% 48% 40% 40%;
+      border: 3px solid #8e551f;
+    }
+
+    .cat-head {
+      position: absolute;
+      left: 37px;
+      bottom: 88px;
+      width: 100px;
+      height: 86px;
+      background: #f0b33d;
+      border: 3px solid #8e551f;
+      border-radius: 48%;
+      z-index: 3;
+    }
+
+    .ear {
+      position: absolute;
+      width: 37px;
+      height: 42px;
+      background: #f0b33d;
+      border: 3px solid #8e551f;
+      top: -18px;
+      transform: rotate(45deg);
+      z-index: -1;
+    }
+
+    .ear.left {
+      left: 5px;
+    }
+
+    .ear.right {
+      right: 5px;
+    }
+
+    .cat-eye {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: #333;
+      border-radius: 50%;
+      top: 38px;
+    }
+
+    .cat-eye.left {
+      left: 27px;
+    }
+
+    .cat-eye.right {
+      right: 27px;
+    }
+
+    .cat-mouth {
+      position: absolute;
+      width: 25px;
+      height: 13px;
+      border-bottom: 3px solid #333;
+      border-radius: 50%;
+      left: 36px;
+      top: 52px;
+    }
+
+    .cat-paw {
+      position: absolute;
+      width: 31px;
+      height: 43px;
+      border-radius: 50%;
+      background: #f0b33d;
+      border: 3px solid #8e551f;
+      right: -12px;
+      top: 17px;
+      transform: rotate(-25deg);
+      z-index: 5;
+    }
+
+    .book {
+      position: absolute;
+      left: 5px;
+      bottom: 10px;
+      width: 65px;
+      height: 42px;
+      background: #6f4ca3;
+      border: 3px solid #4a306e;
+      border-radius: 5px;
+      transform: rotate(-8deg);
+      z-index: 5;
+    }
+
+    .book:after {
+      content: "漢字";
+      position: absolute;
+      color: white;
+      font-size: 12px;
+      font-weight: 800;
+      left: 13px;
+      top: 11px;
+    }
+
+    .pencil-holder {
+      position: absolute;
+      right: 0;
+      bottom: 7px;
+      width: 31px;
+      height: 58px;
+      border-radius: 6px 6px 9px 9px;
+      background: #e8a9a4;
+      border: 2px solid #a76c69;
+      z-index: 6;
+    }
+
+    .pencil {
+      position: absolute;
+      width: 7px;
+      height: 55px;
+      top: -37px;
+      border-radius: 4px;
+      background: #ff6500;
+      transform: rotate(8deg);
+    }
+
+    .pencil.p1 {
+      left: 5px;
+    }
+
+    .pencil.p2 {
+      left: 15px;
+      background: #7437e8;
+      transform: rotate(-7deg);
+    }
+
+    .sakura-mini {
+      position: absolute;
+      color: #ef91a0;
+      font-size: 20px;
+    }
+
+    .sm1 {
+      top: 20px;
+      left: 10px;
+    }
+
+    .sm2 {
+      top: 45px;
+      right: 10px;
+    }
+
+    .recent-card {
+      padding: 18px;
+    }
+
+    .recent-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #ff6500;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      margin-bottom: 17px;
+    }
+
+    .recent-title svg {
+      width: 16px;
+    }
+
+    .loading-card {
+      border: 1px solid #ffd9c0;
+      border-radius: 15px;
+      padding: 15px;
+    }
+
+    .loading-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .loading-icon {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: #fff0e3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ff6500;
+      flex-shrink: 0;
+    }
+
+    .loading-icon svg {
+      width: 19px;
+      animation: rotateLoading 1.3s linear infinite;
+    }
+
+    .progress {
+      width: 100%;
+      height: 9px;
+      border-radius: 20px;
+      background: #f8e9df;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      width: 67%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg,#ffe4d0,#ffd1b4);
+      animation: progressMove 2.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes rotateLoading {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes progressMove {
+      from {
+        width: 50%;
+      }
+      to {
+        width: 76%;
+      }
+    }
+
+    /* =========================================================
+       FUNCTION CARDS
+    ========================================================= */
+
+    .functions-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .function-card {
+      height: 207px;
+      border-radius: 21px;
+      padding: 13px;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid;
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+    }
+
+    .function-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 13px 30px rgba(50,40,30,.10);
+    }
+
+    .function-card:after {
+      content: "";
+      position: absolute;
+      width: 105px;
+      height: 105px;
+      right: -18px;
+      bottom: -30px;
+      background:
+        radial-gradient(
+          circle,
+          rgba(255,255,255,.8) 0 3px,
+          transparent 4px
+        );
+      background-size: 20px 20px;
+      opacity: .8;
+    }
+
+    .card-purple {
+      border-color: #7437e8;
+      background: linear-gradient(135deg,#fff,#f2edff);
+    }
+
+    .card-green {
+      border-color: #00a878;
+      background: linear-gradient(135deg,#fff,#eafaf5);
+    }
+
+    .card-brown {
+      border-color: #c85a00;
+      background: linear-gradient(135deg,#fff,#fff4ea);
+    }
+
+    .card-cyan {
+      border-color: #00b8d9;
+      background: linear-gradient(135deg,#fff,#e8faff);
+    }
+
+    .card-orange {
+      border-color: #ff6500;
+      background: linear-gradient(135deg,#fff,#fff1e8);
+    }
+
+    .card-yellow {
+      border-color: #c7c900;
+      background: linear-gradient(135deg,#fff,#ffffe8);
+    }
+
+    .function-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .function-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke-width: 2.1;
+    }
+
+    .purple-icon {
+      color: #7437e8;
+      background: #e8dcff;
+    }
+
+    .green-icon {
+      color: #00a878;
+      background: #d6f5eb;
+    }
+
+    .brown-icon {
+      color: #c85a00;
+      background: #f4dfcd;
+    }
+
+    .cyan-icon {
+      color: #00b8d9;
+      background: #d6f6fc;
+    }
+
+    .orange-icon {
+      color: #ff6500;
+      background: #ffe1cc;
+    }
+
+    .yellow-icon {
+      color: #b9bb00;
+      background: #f6f3bd;
+    }
+
+    .function-title {
+      position: relative;
+      z-index: 2;
+      font-size: 17px;
+      font-weight: 800;
+      margin-bottom: 7px;
+    }
+
+    .purple-title {
+      color: #7437e8;
+    }
+
+    .green-title {
+      color: #009c70;
+    }
+
+    .brown-title {
+      color: #b74e00;
+    }
+
+    .cyan-title {
+      color: #00a8c7;
+    }
+
+    .orange-title {
+      color: #ff6500;
+    }
+
+    .yellow-title {
+      color: #aeb100;
+    }
+
+    .function-line {
+      width: 30px;
+      height: 3px;
+      border-radius: 5px;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .purple-line {
+      background: #7437e8;
+    }
+
+    .green-line {
+      background: #00a878;
+    }
+
+    .brown-line {
+      background: #c85a00;
+    }
+
+    .cyan-line {
+      background: #00b8d9;
+    }
+
+    .orange-line {
+      background: #ff6500;
+    }
+
+    .yellow-line {
+      background: #c7c900;
+    }
+
+    .function-description {
+      color: #777;
+      font-size: 11px;
+      line-height: 1.55;
+      position: relative;
+      z-index: 2;
+    }
+
+    .function-arrow {
+      position: absolute;
+      right: 13px;
+      bottom: 9px;
+      font-size: 23px;
+      z-index: 5;
+    }
+
+    /* =========================================================
+       SURVEY
+    ========================================================= */
+
+    .survey-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.05fr;
+      gap: 12px;
+    }
+
+    .survey-flow {
+      min-height: 198px;
+      border-radius: 18px;
+      background: white;
+      border: 1px solid #eaded4;
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 1fr .72fr 1fr;
+      gap: 9px;
+      align-items: center;
+    }
+
+    .survey-card {
+      min-height: 165px;
+      border-radius: 14px;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid;
+    }
+
+    .survey-before {
+      background: #e8f1ff;
+      border-color: #c7dcff;
+    }
+
+    .survey-after {
+      background: #dff9ee;
+      border-color: #b5edd7;
+    }
+
+    .survey-heading {
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 9px;
+    }
+
+    .before-heading {
+      color: #3e70d6;
+    }
+
+    .after-heading {
+      color: #00a878;
+    }
+
+    .survey-text {
+      font-size: 10px;
+      line-height: 1.6;
+      color: #59616d;
+      margin-bottom: 13px;
+    }
+
+    .survey-button {
+      width: 100%;
+      height: 31px;
+      border-radius: 20px;
+      color: white;
+      font-size: 10px;
+      font-weight: 800;
+      transition: transform .2s ease;
+    }
+
+    .survey-button:hover {
+      transform: translateY(-2px);
+    }
+
+    .before-button {
+      background: #3d80ed;
+    }
+
+    .after-button {
+      background: #0bb783;
+    }
+
+    .survey-middle {
+      position: relative;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .survey-arrow-left,
+    .survey-arrow-right {
+      position: absolute;
+      color: #5a9bf4;
+      font-size: 28px;
+    }
+
+    .survey-arrow-left {
+      left: -8px;
+    }
+
+    .survey-arrow-right {
+      right: -8px;
+      color: #14b98b;
+    }
+
+    .student-art {
+      width: 135px;
+      height: 120px;
+      position: relative;
+    }
+
+    .student {
+      position: absolute;
+      bottom: 10px;
+      width: 52px;
+      height: 75px;
+      border-radius: 30px 30px 10px 10px;
+    }
+
+    .student.one {
+      left: 13px;
+      background: #ff9b72;
+    }
+
+    .student.two {
+      right: 13px;
+      background: #7b89e8;
+    }
+
+    .head {
+      position: absolute;
+      width: 37px;
+      height: 37px;
+      border-radius: 50%;
+      background: #f3bd91;
+      top: -24px;
+      left: 7px;
+    }
+
+    .hair {
+      position: absolute;
+      width: 42px;
+      height: 25px;
+      border-radius: 50% 50% 20% 20%;
+      background: #593b32;
+      top: -28px;
+      left: 4px;
+    }
+
+    .book-table {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 5px;
+      height: 24px;
+      border-radius: 5px;
+      background: #b97947;
+      z-index: 5;
+    }
+
+    .book-small {
+      position: absolute;
+      width: 42px;
+      height: 12px;
+      border-radius: 3px;
+      background: #f1c653;
+      bottom: 25px;
+      left: 45px;
+      z-index: 6;
+      transform: rotate(-5deg);
+    }
+
+    .thanks-card {
+      min-height: 198px;
+      border-radius: 18px;
+      border: 1px solid #ffc9b2;
+      background: linear-gradient(135deg,#fff7f3,#fff0e9);
+      padding: 18px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .thanks-title {
+      color: #e94e58;
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 10px;
+      letter-spacing: .5px;
+    }
+
+    .thanks-text {
+      width: 63%;
+      color: #ad5557;
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    .thanks-japanese {
+      color: #e65057;
+      font-family: "Noto Sans JP", sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      margin-top: 12px;
+    }
+
+    .daruma {
+      position: absolute;
+      right: 24px;
+      bottom: 8px;
+      width: 75px;
+      height: 85px;
+      border-radius: 50% 50% 45% 45%;
+      background: #e43f42;
+      border: 3px solid #a82b2e;
+    }
+
+    .daruma:before {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: white;
+      left: 15px;
+      top: 23px;
+      box-shadow: 27px 0 0 white;
+    }
+
+    .daruma:after {
+      content: "頑";
+      position: absolute;
+      left: 24px;
+      top: 44px;
+      color: #ffd75d;
+      font-size: 19px;
+      font-weight: 800;
+    }
+
+    .fuji-small {
+      position: absolute;
+      right: -3px;
+      bottom: -5px;
+      width: 120px;
+      height: 90px;
+      background:
+        linear-gradient(
+          135deg,
+          transparent 48%,
+          #8ebbd8 49% 70%,
+          transparent 71%
+        );
+      opacity: .5;
+      z-index: 0;
+    }
+
+    /* =========================================================
+       FADE IN
+    ========================================================= */
+
+    .fade-in {
+      animation: fadeIn .65s ease both;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+    @media (max-width: 1200px) {
+      .main {
+        padding-left: 45px;
+      }
+
+      .functions-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .function-card {
+        height: 190px;
+      }
+
+      .hero-character {
+        width: 37%;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .sidebar {
+        width: 78px;
+        min-width: 78px;
+      }
+
+      .main {
+        width: calc(100% - 78px);
+        margin-left: 78px;
+        padding-left: 20px;
+      }
+
+      .intro-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .intro-card {
+        min-height: 280px;
+      }
+
+      .recent-card {
+        min-height: 190px;
+      }
+
+      .survey-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-title {
+        font-size: 28px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .sidebar {
+        width: calc(100% - 20px);
+        height: 67px;
+        left: 10px;
+        bottom: 10px;
+        top: auto;
+        padding: 5px 8px;
+        border-radius: 20px;
+        flex-direction: row;
+      }
+
+      .logo,
+      .sidebar-bottom {
+        display: none;
+      }
+
+      .nav {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 2px;
+      }
+
+      .nav-item {
+        min-height: 55px;
+        min-width: 48px;
+      }
+
+      .nav-item span {
+        font-size: 7px;
+      }
+
+      .main {
+        width: 100%;
+        margin-left: 0;
+        padding: 10px 10px 90px;
+      }
+
+      .hero {
+        height: auto;
+        min-height: 410px;
+        padding: 20px;
+        align-items: flex-start;
+      }
+
+      .hero-content {
+        width: 100%;
+        height: auto;
+        justify-content: flex-start;
+        padding-top: 8px;
+      }
+
+      .hero-character {
+        width: calc(100% - 30px);
+        height: 160px;
+        top: auto;
+        bottom: 15px;
+        right: 15px;
+      }
+
+      .hero-title {
+        max-width: 90%;
+        font-size: 27px;
+      }
+
+      .quick-card {
+        min-width: 125px;
+      }
+
+      .intro-title,
+      .intro-subtitle,
+      .intro-text {
+        max-width: 100%;
+      }
+
+      .intro-card {
+        padding-bottom: 205px;
+      }
+
+      .intro-illustration {
+        width: 100%;
+        height: 180px;
+        bottom: 0;
+        right: 0;
+      }
+
+      .functions-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .survey-flow {
+        grid-template-columns: 1fr;
+      }
+
+      .survey-middle {
+        height: 90px;
+      }
+
+      .survey-arrow-left,
+      .survey-arrow-right {
+        display: none;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .functions-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-actions {
+        flex-direction: column;
+        width: 140px;
+      }
+
+      .quick-card {
+        height: 65px;
+      }
+
+      .hero {
+        min-height: 430px;
+      }
+
+      .nav-item:nth-child(n+7) {
+        display: none;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-    <!-- THANH MENU BÊN TRÁI -->
-    <aside class="sidebar">
-        <div class="logo">J</div>
-        
-        <nav class="nav-menu">
-            <a href="#" class="nav-item active">
-                <i class="fa-solid fa-house"></i>
-                <span>Trang chủ</span>
-            </a>
-            <a href="#" class="nav-item">
-                <i class="fa-solid fa-scroll"></i>
-                <span>Ngữ pháp</span>
-            </a>
-            <a href="#" class="nav-item">
-                <i class="fa-solid fa-book-open"></i>
-                <span>Từ vựng</span>
-            </a>
-            <a href="#" class="nav-item">
-                <i class="fa-solid fa-language"></i>
-                <span>Kanji</span>
-            </a>
-            <a href="#" class="nav-item">
-                <i class="fa-solid fa-stopwatch"></i>
-                <span>Kiểm tra</span>
-            </a>
-            <a href="#" class="nav-item">
-                <i class="fa-solid fa-clapperboard"></i>
-                <span>Video</span>
-            </a>
-        </nav>
+  <!-- =======================================================
+       BACKGROUND
+  ======================================================== -->
 
-        <div class="user-profile">
-            <i class="fa-regular fa-user"></i>
-        </div>
+  <div class="page-background">
+    <div class="wave-pattern"></div>
+
+    <div class="sakura s1">🌸</div>
+    <div class="sakura s2">🌸</div>
+    <div class="sakura s3">🌸</div>
+    <div class="sakura s4">🌸</div>
+
+    <div class="red-decoration left"></div>
+    <div class="red-decoration right"></div>
+  </div>
+
+
+  <!-- =======================================================
+       APP
+  ======================================================== -->
+
+  <div class="app">
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+      <div class="logo">
+        J
+      </div>
+
+      <nav class="nav">
+
+        <a href="#home"
+           class="nav-item nav-home active"
+           data-section="home">
+          <i data-lucide="house"></i>
+          <span>Trang chủ</span>
+        </a>
+
+        <a href="#grammar"
+           class="nav-item nav-grammar"
+           data-section="grammar">
+          <i data-lucide="notebook-tabs"></i>
+          <span>Ngữ pháp</span>
+        </a>
+
+        <a href="#vocabulary"
+           class="nav-item nav-vocab"
+           data-section="vocabulary">
+          <i data-lucide="book-open"></i>
+          <span>Từ vựng</span>
+        </a>
+
+        <a href="#kanji"
+           class="nav-item nav-kanji"
+           data-section="kanji">
+          <i data-lucide="languages"></i>
+          <span>Kanji</span>
+        </a>
+
+        <a href="#test"
+           class="nav-item nav-test"
+           data-section="test">
+          <i data-lucide="timer"></i>
+          <span>Kiểm tra</span>
+        </a>
+
+        <a href="#video"
+           class="nav-item nav-video"
+           data-section="video">
+          <i data-lucide="film"></i>
+          <span>Video</span>
+        </a>
+
+        <a href="#speaking"
+           class="nav-item nav-speaking"
+           data-section="speaking">
+          <i data-lucide="mic-2"></i>
+          <span>Speaking</span>
+        </a>
+
+        <a href="#courses"
+           class="nav-item nav-course"
+           data-section="courses">
+          <i data-lucide="layers-3"></i>
+          <span>Học phần</span>
+        </a>
+
+      </nav>
+
+      <div class="sidebar-bottom">
+
+        <a href="#account"
+           class="nav-item nav-user"
+           data-section="account">
+          <i data-lucide="user-round"></i>
+          <span>Tài khoản</span>
+        </a>
+
+      </div>
+
     </aside>
 
-    <!-- NỘI DUNG CHÍNH -->
-    <main class="main-content">
-        
-        <!-- BANNER ĐƯỜNG PHỐ NHẬT BẢN -->
-        <header class="banner">
-            <div class="banner-content">
-                <div class="badge">J-DEKI GO</div>
-                <h1>Xin chào Admin 2</h1>
-                
-                <div class="action-buttons">
-                    <a href="#" class="btn btn-blue">
-                        <div class="icon-bg">
-                            <span style="font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: 800;">あ</span>
-                        </div>
-                        Bảng chữ cái
-                        <i class="fa-solid fa-chevron-right arrow-icon"></i>
-                    </a>
-                    
-                    <a href="#" class="btn btn-red">
-                        <div class="icon-bg">
-                            <i class="fa-solid fa-stopwatch"></i>
-                        </div>
-                        Kiểm tra ngay
-                        <i class="fa-solid fa-chevron-right arrow-icon"></i>
-                    </a>
-                </div>
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="main">
+
+      <div class="content">
+
+        <!-- =================================================
+             HERO
+        ================================================== -->
+
+        <section class="hero fade-in" id="home">
+
+          <div class="hero-overlay"></div>
+
+          <div class="hero-content">
+
+            <div class="hero-badge">
+              J-DEKI GO
             </div>
-            
-            <!-- Ô kính mờ góc phải banner -->
-            <div class="banner-right-box"></div>
-        </header>
 
-        <!-- KHU VỰC LƯỚI BÊN DƯỚI -->
-        <section class="content-grid">
-            
-            <!-- KHU VỰC GIỚI THIỆU -->
-            <article class="card intro-card">
-                <div class="card-header">
-                    <i class="fa-solid fa-book-open"></i> GIỚI THIỆU
-                </div>
-                
-                <h2 class="intro-title">FPT大学カントー校における日本語非専攻生の自主学習能力向上を支援するウェブサイトの構築</h2>
-                
-                <div class="intro-desc-1">
-                    Xây dựng website hỗ trợ nâng cao năng lực học tập tự chủ dành cho sinh viên không chuyên tiếng Nhật tại Trường Đại học FPT Cần Thơ
-                </div>
-                
-                <div class="intro-desc-2">
-                    <strong>J-DEKI GO</strong> là website hỗ trợ nâng cao năng lực học tập tự chủ dành cho sinh viên không chuyên tiếng Nhật tại Trường Đại học FPT Cần Thơ.<br><br>
-                    Nội dung bám sát giáo trình Dekiru Nihongo, giúp bạn học - luyện tập - kiểm tra một cách hiệu quả và theo dõi tiến độ học tập của mình.
+            <h1 class="hero-title">
+              Xin chào Nguyễn Văn Đăng
+            </h1>
+
+            <div class="quick-actions">
+
+              <button
+                class="quick-card"
+                onclick="openFeature('alphabet')">
+
+                <div class="quick-top">
+
+                  <div class="quick-icon blue">
+                    <span style="font-size:24px;font-weight:800;">あ</span>
+                  </div>
+
+                  <span class="quick-arrow">→</span>
+
                 </div>
 
-                <!-- Chú Mèo Thần Tài (Maneki Neko) -->
-                <div class="mascot-img"></div>
-            </article>
+                <div class="quick-title">
+                  Bảng chữ cái
+                </div>
 
-            <!-- KHU VỰC HỌC PHẦN -->
-            <aside class="card recent-card">
-                <div class="card-header">
-                    <i class="fa-regular fa-clock"></i> HỌC PHẦN GẦN ĐÂY
+              </button>
+
+
+              <button
+                class="quick-card"
+                onclick="openFeature('test')">
+
+                <div class="quick-top">
+
+                  <div class="quick-icon red">
+                    <i data-lucide="timer"></i>
+                  </div>
+
+                  <span class="quick-arrow">→</span>
+
                 </div>
-                
-                <div class="empty-state">
-                    Chưa có học phần nào.<br>Hãy tạo học phần đầu tiên.
+
+                <div class="quick-title">
+                  Kiểm tra ngay
                 </div>
-            </aside>
+
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <!-- HERO CHARACTER -->
+
+          <div class="hero-character">
+
+            <!--
+              THAY URL ẢNH TẠI ĐÂY NẾU BẠN CÓ ẢNH NHÂN VẬT
+            -->
+
+            <div class="character-placeholder">
+              <div>
+                <div style="font-size:50px;margin-bottom:5px;">✦</div>
+                <div>Hình ảnh nhân vật Nhật Bản</div>
+                <small style="opacity:.7;">
+                  Thay bằng ảnh hero-character
+                </small>
+              </div>
+            </div>
+
+          </div>
 
         </section>
+
+
+        <!-- =================================================
+             INTRO + RECENT
+        ================================================== -->
+
+        <div class="intro-layout fade-in">
+
+          <!-- INTRO -->
+
+          <section class="intro-card">
+
+            <div class="section-header">
+              <i data-lucide="book-open"></i>
+              <span>GIỚI THIỆU</span>
+            </div>
+
+            <h2 class="intro-title">
+              FPT大学カントー校における日本語非専攻学生の自主学習能力向上を支援するウェブサイトの構築
+            </h2>
+
+            <div class="intro-subtitle">
+              Xây dựng website hỗ trợ nâng cao năng lực học tập tự chủ dành cho sinh viên không chuyên tiếng Nhật tại Trường Đại học FPT Cần Thơ
+            </div>
+
+            <div class="intro-text">
+
+              <p>
+                <span class="orange-text">J-DEKI GO</span>
+                là website hỗ trợ nâng cao năng lực học tập tự chủ dành cho sinh viên không chuyên tiếng Nhật tại Trường Đại học FPT Cần Thơ.
+              </p>
+
+              <p>
+                Nội dung bám sát giáo trình Dekiru Nihongo, giúp bạn học - luyện tập - kiểm tra một cách hiệu quả và theo dõi tiến độ học tập của mình.
+              </p>
+
+            </div>
+
+
+            <!-- CAT ILLUSTRATION -->
+
+            <div class="intro-illustration">
+
+              <div class="cat-art">
+
+                <div class="mountain"></div>
+
+                <div class="sakura-mini sm1">
+                  ✿
+                </div>
+
+                <div class="sakura-mini sm2">
+                  ✿
+                </div>
+
+                <div class="book"></div>
+
+                <div class="cat-body"></div>
+
+                <div class="cat-head">
+
+                  <div class="ear left"></div>
+                  <div class="ear right"></div>
+
+                  <div class="cat-eye left"></div>
+                  <div class="cat-eye right"></div>
+
+                  <div class="cat-mouth"></div>
+
+                  <div class="cat-paw"></div>
+
+                </div>
+
+                <div class="pencil-holder">
+
+                  <div class="pencil p1"></div>
+                  <div class="pencil p2"></div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- RECENT -->
+
+          <section class="recent-card">
+
+            <div class="recent-title">
+              <i data-lucide="clock-3"></i>
+              <span>HỌC PHẦN GẦN ĐÂY</span>
+            </div>
+
+            <div class="loading-card">
+
+              <div class="loading-title">
+
+                <div class="loading-icon">
+                  <i data-lucide="rotate-cw"></i>
+                </div>
+
+                <span>
+                  Đang tải học phần đã tạo...
+                </span>
+
+              </div>
+
+              <div class="progress">
+                <div class="progress-bar"></div>
+              </div>
+
+            </div>
+
+          </section>
+
+        </div>
+
+
+        <!-- =================================================
+             FUNCTIONS
+        ================================================== -->
+
+        <div class="section-header fade-in">
+          <i data-lucide="sliders-horizontal"></i>
+          <span>CHỨC NĂNG CHÍNH</span>
+        </div>
+
+
+        <section class="functions-grid fade-in">
+
+          <!-- GRAMMAR -->
+
+          <a
+            href="#grammar"
+            class="function-card card-purple"
+            onclick="openFeature('grammar')">
+
+            <div class="function-icon purple-icon">
+              <i data-lucide="notebook-tabs"></i>
+            </div>
+
+            <div class="function-title purple-title">
+              Ngữ pháp
+            </div>
+
+            <div class="function-line purple-line"></div>
+
+            <div class="function-description">
+              Lý thuyết bám sát giáo trình Dekiru Nihongo kèm bài tập giúp vận dụng...
+            </div>
+
+            <div class="function-arrow purple-title">
+              →
+            </div>
+
+          </a>
+
+
+          <!-- VOCABULARY -->
+
+          <a
+            href="#vocabulary"
+            class="function-card card-green"
+            onclick="openFeature('vocabulary')">
+
+            <div class="function-icon green-icon">
+              <i data-lucide="book-open"></i>
+            </div>
+
+            <div class="function-title green-title">
+              Từ vựng
+            </div>
+
+            <div class="function-line green-line"></div>
+
+            <div class="function-description">
+              Mở rộng vốn từ vựng theo từng bài.
+            </div>
+
+            <div class="function-arrow green-title">
+              →
+            </div>
+
+          </a>
+
+
+          <!-- KANJI -->
+
+          <a
+            href="#kanji"
+            class="function-card card-brown"
+            onclick="openFeature('kanji')">
+
+            <div class="function-icon brown-icon">
+              <span style="font-size:22px;font-weight:800;">漢</span>
+            </div>
+
+            <div class="function-title brown-title">
+              Kanji
+            </div>
+
+            <div class="function-line brown-line"></div>
+
+            <div class="function-description">
+              Nắm vững chữ Hán qua cách đọc, ý nghĩa, cách viết và bài tập củng cố.
+            </div>
+
+            <div class="function-arrow brown-title">
+              →
+            </div>
+
+          </a>
+
+
+          <!-- VIDEO -->
+
+          <a
+            href="#video"
+            class="function-card card-cyan"
+            onclick="openFeature('video')">
+
+            <div class="function-icon cyan-icon">
+              <i data-lucide="film"></i>
+            </div>
+
+            <div class="function-title cyan-title">
+              Video
+            </div>
+
+            <div class="function-line cyan-line"></div>
+
+            <div class="function-description">
+              Củng cố kiến thức qua video ngắn.
+            </div>
+
+            <div class="function-arrow cyan-title">
+              →
+            </div>
+
+          </a>
+
+
+          <!-- SPEAKING -->
+
+          <a
+            href="#speaking"
+            class="function-card card-orange"
+            onclick="openFeature('speaking')">
+
+            <div class="function-icon orange-icon">
+              <i data-lucide="mic-2"></i>
+            </div>
+
+            <div class="function-title orange-title">
+              Speaking
+            </div>
+
+            <div class="function-line orange-line"></div>
+
+            <div class="function-description">
+              Luyện nói và luyện đọc trong cùng một module theo từng cấp độ.
+            </div>
+
+            <div class="function-arrow orange-title">
+              →
+            </div>
+
+          </a>
+
+
+          <!-- COURSES -->
+
+          <a
+            href="#courses"
+            class="function-card card-yellow"
+            onclick="openFeature('courses')">
+
+            <div class="function-icon yellow-icon">
+              <i data-lucide="layers-3"></i>
+            </div>
+
+            <div class="function-title yellow-title">
+              Học phần
+            </div>
+
+            <div class="function-line yellow-line"></div>
+
+            <div class="function-description">
+              Tự tạo bộ thẻ học cá nhân, quản lý tiến độ và theo dõi lịch sử.
+            </div>
+
+            <div class="function-arrow yellow-title">
+              →
+            </div>
+
+          </a>
+
+        </section>
+
+
+        <!-- =================================================
+             SURVEY
+        ================================================== -->
+
+        <div class="section-header fade-in">
+          <i data-lucide="chart-no-axes-column"></i>
+          <span>KHẢO SÁT</span>
+        </div>
+
+
+        <section class="survey-layout fade-in">
+
+          <div class="survey-flow">
+
+            <!-- BEFORE -->
+
+            <div class="survey-card survey-before">
+
+              <div>
+
+                <div class="survey-heading before-heading">
+                  Trước khi sử dụng
+                </div>
+
+                <div class="survey-text">
+                  Hãy dành ít phút hoàn thành khảo sát trước khi bắt đầu học nhé!
+                </div>
+
+              </div>
+
+              <button
+                class="survey-button before-button"
+                onclick="goToSurvey('before')">
+                Đi đến khảo sát →
+              </button>
+
+            </div>
+
+
+            <!-- STUDENTS -->
+
+            <div class="survey-middle">
+
+              <span class="survey-arrow-left">
+                →
+              </span>
+
+              <div class="student-art">
+
+                <div class="student one">
+                  <div class="head">
+                    <div class="hair"></div>
+                  </div>
+                </div>
+
+                <div class="student two">
+                  <div class="head">
+                    <div class="hair"></div>
+                  </div>
+                </div>
+
+                <div class="book-small"></div>
+                <div class="book-table"></div>
+
+              </div>
+
+              <span class="survey-arrow-right">
+                →
+              </span>
+
+            </div>
+
+
+            <!-- AFTER -->
+
+            <div class="survey-card survey-after">
+
+              <div>
+
+                <div class="survey-heading after-heading">
+                  Sau khi sử dụng
+                </div>
+
+                <div class="survey-text">
+                  Chia sẻ ý kiến của bạn sẽ giúp chúng mình cải thiện tốt hơn!
+                </div>
+
+              </div>
+
+              <button
+                class="survey-button after-button"
+                onclick="goToSurvey('after')">
+                Đi đến khảo sát →
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <!-- THANKS -->
+
+          <div class="thanks-card">
+
+            <div class="thanks-title">
+              🌸 &nbsp;CẢM ƠN BẠN!
+            </div>
+
+            <div class="thanks-text">
+              Cảm ơn bạn đã đồng hành cùng J-DEKI GO.
+              Chúc bạn học tập tốt và sớm đạt được mục tiêu tiếng Nhật của mình!
+            </div>
+
+            <div class="thanks-japanese">
+              頑張ってください！
+            </div>
+
+            <div class="fuji-small"></div>
+            <div class="daruma"></div>
+
+          </div>
+
+        </section>
+
+      </div>
+
     </main>
+
+  </div>
+
+
+  <!-- =======================================================
+       JAVASCRIPT
+  ======================================================== -->
+
+  <script>
+
+    /* =======================================================
+       INITIALIZE ICONS
+    ======================================================== */
+
+    document.addEventListener("DOMContentLoaded", function() {
+
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+
+      document.body.classList.add("loaded");
+
+    });
+
+
+    /* =======================================================
+       NAVIGATION
+    ======================================================== */
+
+    const navItems =
+      document.querySelectorAll(".nav-item[data-section]");
+
+    navItems.forEach(function(item) {
+
+      item.addEventListener("click", function() {
+
+        navItems.forEach(function(nav) {
+          nav.classList.remove("active");
+        });
+
+        this.classList.add("active");
+
+      });
+
+    });
+
+
+    /* =======================================================
+       OPEN FEATURE
+    ======================================================== */
+
+    function openFeature(feature) {
+
+      console.log("Open feature:", feature);
+
+      /*
+        GOOGLE APPS SCRIPT INTEGRATION
+
+        Nếu project hiện tại của bạn đã có function
+        chuyển trang/module, hãy thay phần bên dưới bằng
+        function hiện tại.
+
+        Ví dụ:
+
+        google.script.run
+          .withSuccessHandler(...)
+          .openPage(feature);
+
+        Không cần thay đổi giao diện.
+      */
+
+      const featureNames = {
+
+        alphabet: "Bảng chữ cái",
+
+        grammar: "Ngữ pháp",
+
+        vocabulary: "Từ vựng",
+
+        kanji: "Kanji",
+
+        test: "Kiểm tra",
+
+        video: "Video",
+
+        speaking: "Speaking",
+
+        courses: "Học phần"
+
+      };
+
+      const name = featureNames[feature];
+
+      if (!name) return;
+
+      /*
+        Nếu chưa kết nối backend,
+        tạm thời chỉ cuộn tới khu vực tương ứng.
+      */
+
+      const target = document.getElementById(
+        feature === "alphabet" ? "home" : feature
+      );
+
+      if (target) {
+
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+      }
+
+    }
+
+
+    /* =======================================================
+       SURVEY
+    ======================================================== */
+
+    function goToSurvey(type) {
+
+      console.log("Survey:", type);
+
+      /*
+        Có thể thay bằng URL Google Forms hoặc
+        function Apps Script hiện tại.
+
+        Ví dụ:
+
+        window.open("YOUR_GOOGLE_FORM_URL", "_blank");
+
+      */
+
+      const surveyUrl = "";
+
+      if (surveyUrl) {
+
+        window.open(
+          surveyUrl,
+          "_blank",
+          "noopener,noreferrer"
+        );
+
+      } else {
+
+        alert(
+          type === "before"
+            ? "Khảo sát trước khi sử dụng"
+            : "Khảo sát sau khi sử dụng"
+        );
+
+      }
+
+    }
+
+
+    /* =======================================================
+       SCROLL ACTIVE NAV
+    ======================================================== */
+
+    const sections = [
+      "home",
+      "grammar",
+      "vocabulary",
+      "kanji",
+      "test",
+      "video",
+      "speaking",
+      "courses",
+      "account"
+    ];
+
+    const observer = new IntersectionObserver(
+      function(entries) {
+
+        entries.forEach(function(entry) {
+
+          if (!entry.isIntersecting) return;
+
+          const current =
+            entry.target.id;
+
+          navItems.forEach(function(item) {
+
+            item.classList.remove("active");
+
+            if (
+              item.dataset.section === current
+            ) {
+              item.classList.add("active");
+            }
+
+          });
+
+        });
+
+      },
+      {
+        threshold: 0.25
+      }
+    );
+
+
+    sections.forEach(function(id) {
+
+      const section =
+        document.getElementById(id);
+
+      if (section) {
+        observer.observe(section);
+      }
+
+    });
+
+
+    /* =======================================================
+       GOOGLE APPS SCRIPT SAFE HELPER
+    ======================================================== */
+
+    function runAppsScript(functionName, ...args) {
+
+      if (
+        typeof google !== "undefined" &&
+        google.script &&
+        google.script.run
+      ) {
+
+        return google.script.run[
+          functionName
+        ](...args);
+
+      }
+
+      console.warn(
+        "Apps Script function unavailable:",
+        functionName
+      );
+
+    }
+
+
+    /* =======================================================
+       PREVENT EMPTY ANCHOR JUMP
+    ======================================================== */
+
+    document
+      .querySelectorAll('a[href="#"]')
+      .forEach(function(link) {
+
+        link.addEventListener(
+          "click",
+          function(event) {
+            event.preventDefault();
+          }
+        );
+
+      });
+
+  </script>
 
 </body>
 </html>

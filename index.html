@@ -3,62 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>J-DEKI GO</title>
-    <!-- Thêm thư viện FontAwesome để hiển thị các icon giống thiết kế -->
+    <title>J-DEKI GO - Ôn tập Tiếng Nhật</title>
+    
+    <!-- Tích hợp Font chữ Bo tròn kiểu Nhật (M PLUS Rounded) và Nunito -->
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tích hợp FontAwesome Icon (Đảm bảo icon không bị lỗi) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
-
+        /* === CÀI ĐẶT CHUNG === */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Nunito', sans-serif;
+            font-family: 'Nunito', 'M PLUS Rounded 1c', sans-serif;
         }
 
-        /* Hình nền tổng thể của toàn bộ trang (Hoa anh đào mờ) */
+        /* Hình nền toàn trang (Hoa anh đào mờ ảo, tươi sáng) */
         body {
-            background-color: #fce8e6; /* Màu nền dự phòng */
-            /* BẠN HÃY THAY LINK ẢNH NỀN HOA ANH ĐÀO VÀO DƯỚI ĐÂY */
-            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png'); 
+            /* Sử dụng ảnh hoa anh đào làm nền */
+            background-image: url('https://images.unsplash.com/photo-1522283660083-d48ee1bb5724?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             display: flex;
             height: 100vh;
             padding: 15px;
             overflow: hidden;
+            position: relative;
         }
 
-        /* ================= SIDEBAR (THANH ĐIỀU HƯỚNG BÊN TRÁI) ================= */
+        /* Lớp phủ màu trắng hồng để làm dịu background, giúp chữ nổi bật */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(255, 248, 246, 0.85); /* Màu trắng hồng mờ */
+            backdrop-filter: blur(3px);
+            z-index: 0;
+        }
+
+        /* === THANH SIDEBAR BÊN TRÁI === */
         .sidebar {
-            width: 90px;
+            position: relative;
+            z-index: 10;
+            width: 100px;
             background-color: #ffffff;
             border-radius: 25px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            margin-right: 20px;
-            z-index: 10;
+            padding: 25px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin-right: 25px;
+            border: 2px solid #fff;
         }
 
-        .sidebar .logo {
-            width: 50px;
-            height: 50px;
-            background-color: #ff6b00;
+        .logo {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #ff8c00, #ff5e00);
             color: white;
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 800;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 16px;
-            margin-bottom: 30px;
+            border-radius: 18px;
+            margin-bottom: 35px;
+            box-shadow: 0 4px 15px rgba(255, 94, 0, 0.4);
         }
 
         .nav-menu {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
             width: 100%;
             align-items: center;
             flex: 1;
@@ -69,52 +89,60 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            width: 70px;
-            height: 70px;
-            border-radius: 16px;
+            width: 75px;
+            height: 75px;
+            border-radius: 20px;
             text-decoration: none;
-            color: #888;
+            color: #a0a0a0;
             transition: all 0.3s ease;
-            gap: 5px;
+            gap: 6px;
         }
 
         .nav-item span {
-            font-size: 11px;
-            font-weight: 700;
+            font-size: 12px;
+            font-weight: 800;
         }
 
         .nav-item i {
-            font-size: 22px;
+            font-size: 24px;
         }
 
-        /* Trạng thái đang chọn (Active) */
         .nav-item.active {
-            background-color: #ff6b00;
+            background: linear-gradient(135deg, #ff8c00, #ff5e00);
             color: white;
-            box-shadow: 0 4px 10px rgba(255, 107, 0, 0.4);
+            box-shadow: 0 6px 15px rgba(255, 94, 0, 0.35);
         }
 
         .nav-item:hover:not(.active) {
-            background-color: #fff4ec;
-            color: #ff6b00;
+            background-color: #fff0e6;
+            color: #ff5e00;
+            transform: translateY(-2px);
         }
 
         .user-profile {
             margin-top: auto;
-            width: 50px;
-            height: 50px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
-            border: 2px solid #ff6b00;
+            border: 2.5px solid #ff5e00;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #ff6b00;
-            font-size: 20px;
+            color: #ff5e00;
+            font-size: 22px;
             background-color: #fff;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .user-profile:hover {
+            background-color: #ff5e00;
+            color: white;
         }
 
-        /* ================= KHU VỰC NỘI DUNG CHÍNH ================= */
+        /* === KHU VỰC NỘI DUNG CHÍNH === */
         .main-content {
+            position: relative;
+            z-index: 10;
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -122,38 +150,35 @@
             padding-right: 10px;
         }
 
-        /* Thanh cuộn cho nội dung chính */
-        .main-content::-webkit-scrollbar {
-            width: 6px;
-        }
-        .main-content::-webkit-scrollbar-thumb {
-            background: #ff6b00;
-            border-radius: 10px;
-        }
+        /* Thanh cuộn siêu đẹp */
+        .main-content::-webkit-scrollbar { width: 8px; }
+        .main-content::-webkit-scrollbar-track { background: transparent; }
+        .main-content::-webkit-scrollbar-thumb { background: #ffbc99; border-radius: 10px; }
+        .main-content::-webkit-scrollbar-thumb:hover { background: #ff5e00; }
 
-        /* --- BANNER --- */
+        /* --- BANNER (ĐƯỜNG PHỐ NHẬT BẢN) --- */
         .banner {
             position: relative;
             width: 100%;
-            height: 260px;
-            border-radius: 25px;
+            height: 280px;
+            border-radius: 30px;
             overflow: hidden;
-            padding: 30px;
+            padding: 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            
-            /* BẠN HÃY THAY LINK ẢNH ĐƯỜNG PHỐ NHẬT BẢN VÀO DƯỚI ĐÂY */
-            background: url('https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=1200&auto=format&fit=crop') center/cover no-repeat;
+            margin-bottom: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            /* Hình ảnh đường phố/đền thờ Nhật Bản rực rỡ */
+            background: url('https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=1200&auto=format&fit=crop') center 60% / cover no-repeat;
         }
 
+        /* Lớp màng đen gradient mờ để làm nổi bật chữ trắng */
         .banner::before {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.5) 100%);
+            background: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.6) 100%);
             z-index: 1;
         }
 
@@ -167,150 +192,172 @@
         }
 
         .badge {
-            background-color: #ff6b00;
+            background: linear-gradient(135deg, #ff8c00, #ff5e00);
             color: white;
-            padding: 4px 12px;
-            border-radius: 8px;
-            font-size: 11px;
+            padding: 6px 14px;
+            border-radius: 10px;
+            font-size: 13px;
             font-weight: 800;
             display: inline-block;
             width: max-content;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(255, 94, 0, 0.4);
         }
 
         .banner h1 {
-            font-size: 36px;
+            font-size: 40px;
             font-weight: 800;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+            letter-spacing: 0.5px;
         }
 
+        /* 2 NÚT BẤM TRÊN BANNER */
         .action-buttons {
             display: flex;
-            gap: 15px;
-            margin-top: 10px;
+            gap: 18px;
+            margin-top: 15px;
         }
 
         .btn {
             background-color: white;
-            padding: 12px 20px;
-            border-radius: 15px;
+            padding: 12px 25px 12px 12px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
             text-decoration: none;
-            color: #ff6b00;
-            font-weight: 700;
-            font-size: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            transition: transform 0.2s;
+            color: #ff5e00;
+            font-weight: 800;
+            font-size: 16px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         .btn:hover {
-            transform: translateY(-3px);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.3);
         }
 
         .btn .icon-bg {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 22px;
         }
 
-        .btn-blue .icon-bg { background-color: #e6f0ff; color: #0066ff; }
-        .btn-red .icon-bg { background-color: #ffe6e6; color: #ff3333; }
+        /* Nút Bảng chữ cái */
+        .btn-blue .icon-bg { 
+            background-color: #e8f4ff; 
+            color: #0088ff; 
+        }
         
-        .btn i.fa-arrow-right {
-            color: #ff6b00;
+        /* Nút Kiểm tra ngay */
+        .btn-red .icon-bg { 
+            background-color: #ffeaea; 
+            color: #ff4444; 
+        }
+        
+        .arrow-icon {
+            color: #ffbc99;
             font-size: 14px;
-            margin-left: 5px;
+            margin-left: 10px;
         }
 
+        /* Hộp mờ bên phải banner (Glassmorphism) */
         .banner-right-box {
             position: relative;
             z-index: 2;
-            width: 450px;
-            height: 180px;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 20px;
+            width: 480px;
+            height: 200px;
+            background: rgba(30, 30, 30, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1.5px solid rgba(255,255,255,0.25);
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
-        /* --- PHẦN GRID (GIỚI THIỆU & HỌC PHẦN GẦN ĐÂY) --- */
+        /* --- PHẦN GRID (LƯỚI NỘI DUNG) --- */
         .content-grid {
             display: grid;
-            grid-template-columns: 1.8fr 1fr; /* Tỷ lệ 2 cột giống hình */
-            gap: 20px;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
         }
 
         .card {
             background-color: #ffffff;
-            border-radius: 25px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            border-radius: 30px;
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
             position: relative;
+            overflow: hidden;
+            border: 1px solid #fff3eb;
         }
 
         .card-header {
             display: flex;
             align-items: center;
-            gap: 10px;
-            color: #ff6b00;
+            gap: 12px;
+            color: #ff5e00;
             font-weight: 800;
-            font-size: 14px;
+            font-size: 15px;
             text-transform: uppercase;
-            margin-bottom: 20px;
-            letter-spacing: 0.5px;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
         }
+        
+        .card-header i { font-size: 20px; }
 
         /* Card Giới Thiệu */
-        .intro-card {
-            display: flex;
-            flex-direction: column;
-        }
-
         .intro-title {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 800;
-            color: #222;
-            margin-bottom: 15px;
-            line-height: 1.4;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            line-height: 1.5;
         }
 
         .intro-desc-1 {
-            border-left: 3px solid #ff6b00;
-            padding-left: 15px;
-            color: #555;
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 15px;
-            font-weight: 600;
+            border-left: 4px solid #ff5e00;
+            padding-left: 20px;
+            color: #444;
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-weight: 700;
+            background-color: #fff9f5;
+            padding: 15px 15px 15px 20px;
+            border-radius: 0 15px 15px 0;
         }
 
         .intro-desc-2 {
             color: #666;
-            font-size: 14px;
-            line-height: 1.6;
-            max-width: 60%; /* Chừa chỗ cho hình mèo */
+            font-size: 15.5px;
+            line-height: 1.8;
+            max-width: 65%; /* Chừa chỗ cho chú mèo */
+            font-weight: 600;
         }
 
         .intro-desc-2 strong {
-            color: #ff6b00;
+            color: #ff5e00;
             font-weight: 800;
         }
 
-        /* Ảnh mèo thần tài */
+        /* ẢNH CHÚ MÈO THẦN TÀI (Được căn góc chuẩn như thiết kế) */
         .mascot-img {
             position: absolute;
-            right: 20px;
-            bottom: 10px;
-            width: 220px;
+            right: -10px;
+            bottom: -15px;
+            width: 320px; /* Chỉnh kích thước to rõ */
             height: auto;
-            /* BẠN HÃY THAY LINK ẢNH MÈO THẦN TÀI VÀO DƯỚI ĐÂY (Nên dùng ảnh đuôi .png trong suốt) */
-            /* background-image: url('link-anh-meo-cua-ban.png'); */
+            z-index: 5;
+            pointer-events: none; /* Không cho click đè lên chữ */
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+            /* Dùng ảnh vector nét căng của Mèo may mắn Nhật Bản */
+            content: url('https://cdn.pixabay.com/photo/2024/02/26/16/23/cat-8598379_1280.png');
         }
 
         /* Card Học Phần Gần Đây */
@@ -320,20 +367,28 @@
         }
 
         .empty-state {
-            background-color: #fffaf5;
-            border: 1px solid #ffe8d6;
-            border-radius: 15px;
-            padding: 30px 20px;
+            background-color: #fffaf6;
+            border: 2px dashed #ffdac2;
+            border-radius: 20px;
+            padding: 40px 20px;
             text-align: center;
-            color: #999;
-            font-size: 14px;
-            font-weight: 600;
+            color: #a89f98;
+            font-size: 15px;
+            font-weight: 700;
+            margin-top: 10px;
+            transition: 0.3s;
         }
+        .empty-state:hover {
+            background-color: #fff5ed;
+            border-color: #ffbc99;
+            color: #ff5e00;
+        }
+
     </style>
 </head>
 <body>
 
-    <!-- SIDEBAR -->
+    <!-- THANH MENU BÊN TRÁI -->
     <aside class="sidebar">
         <div class="logo">J</div>
         
@@ -372,7 +427,7 @@
     <!-- NỘI DUNG CHÍNH -->
     <main class="main-content">
         
-        <!-- BANNER -->
+        <!-- BANNER ĐƯỜNG PHỐ NHẬT BẢN -->
         <header class="banner">
             <div class="banner-content">
                 <div class="badge">J-DEKI GO</div>
@@ -381,25 +436,27 @@
                 <div class="action-buttons">
                     <a href="#" class="btn btn-blue">
                         <div class="icon-bg">
-                            <span style="font-family: serif; font-weight: bold;">あ</span>
+                            <span style="font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: 800;">あ</span>
                         </div>
                         Bảng chữ cái
-                        <i class="fa-solid fa-arrow-right"></i>
+                        <i class="fa-solid fa-chevron-right arrow-icon"></i>
                     </a>
+                    
                     <a href="#" class="btn btn-red">
                         <div class="icon-bg">
                             <i class="fa-solid fa-stopwatch"></i>
                         </div>
                         Kiểm tra ngay
-                        <i class="fa-solid fa-arrow-right"></i>
+                        <i class="fa-solid fa-chevron-right arrow-icon"></i>
                     </a>
                 </div>
             </div>
             
+            <!-- Ô kính mờ góc phải banner -->
             <div class="banner-right-box"></div>
         </header>
 
-        <!-- LƯỚI NỘI DUNG -->
+        <!-- KHU VỰC LƯỚI BÊN DƯỚI -->
         <section class="content-grid">
             
             <!-- KHU VỰC GIỚI THIỆU -->
@@ -419,18 +476,18 @@
                     Nội dung bám sát giáo trình Dekiru Nihongo, giúp bạn học - luyện tập - kiểm tra một cách hiệu quả và theo dõi tiến độ học tập của mình.
                 </div>
 
-                <!-- Thẻ img để chèn hình mèo thần tài -->
-                <!-- <img src="link-anh-meo.png" alt="Mascot" class="mascot-img"> -->
+                <!-- Chú Mèo Thần Tài (Maneki Neko) -->
+                <div class="mascot-img"></div>
             </article>
 
-            <!-- KHU VỰC HỌC PHẦN GẦN ĐÂY -->
+            <!-- KHU VỰC HỌC PHẦN -->
             <aside class="card recent-card">
                 <div class="card-header">
                     <i class="fa-regular fa-clock"></i> HỌC PHẦN GẦN ĐÂY
                 </div>
                 
                 <div class="empty-state">
-                    Chưa có học phần nào. Hãy tạo học phần đầu tiên.
+                    Chưa có học phần nào.<br>Hãy tạo học phần đầu tiên.
                 </div>
             </aside>
 

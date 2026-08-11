@@ -3,174 +3,439 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>J-DEKI GO - Học Tiếng Nhật</title>
+    <title>J-DEKI GO</title>
+    <!-- Thêm thư viện FontAwesome để hiển thị các icon giống thiết kế -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            box-sizing: border-box;
+            font-family: 'Nunito', sans-serif;
         }
+
+        /* Hình nền tổng thể của toàn bộ trang (Hoa anh đào mờ) */
         body {
-            background-color: #f7f3ed;
+            background-color: #fce8e6; /* Màu nền dự phòng */
+            /* BẠN HÃY THAY LINK ẢNH NỀN HOA ANH ĐÀO VÀO DƯỚI ĐÂY */
+            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png'); 
             display: flex;
             height: 100vh;
+            padding: 15px;
             overflow: hidden;
         }
-        /* Thanh sidebar bên trái */
+
+        /* ================= SIDEBAR (THANH ĐIỀU HƯỚNG BÊN TRÁI) ================= */
         .sidebar {
             width: 90px;
-            background-color: #fff;
+            background-color: #ffffff;
+            border-radius: 25px;
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 20px 0;
-            border-right: 1px solid #e0d8cc;
-            gap: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-right: 20px;
+            z-index: 10;
         }
-        .logo {
+
+        .sidebar .logo {
             width: 50px;
             height: 50px;
-            background-color: #ff6600;
-            border-radius: 15px;
+            background-color: #ff6b00;
+            color: white;
+            font-size: 24px;
+            font-weight: 800;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 20px;
-            margin-bottom: 10px;
+            border-radius: 16px;
+            margin-bottom: 30px;
         }
+
+        .nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            align-items: center;
+            flex: 1;
+        }
+
         .nav-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            text-decoration: none;
-            color: #666;
-            font-size: 11px;
-            gap: 5px;
-            padding: 10px;
-            border-radius: 12px;
+            justify-content: center;
             width: 70px;
-            transition: 0.2s;
-        }
-        .nav-item.active, .nav-item:hover {
-            background-color: #ff6600;
-            color: white;
-        }
-        .nav-item span {
-            font-size: 20px;
+            height: 70px;
+            border-radius: 16px;
+            text-decoration: none;
+            color: #888;
+            transition: all 0.3s ease;
+            gap: 5px;
         }
 
-        /* Nội dung chính bên phải */
+        .nav-item span {
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .nav-item i {
+            font-size: 22px;
+        }
+
+        /* Trạng thái đang chọn (Active) */
+        .nav-item.active {
+            background-color: #ff6b00;
+            color: white;
+            box-shadow: 0 4px 10px rgba(255, 107, 0, 0.4);
+        }
+
+        .nav-item:hover:not(.active) {
+            background-color: #fff4ec;
+            color: #ff6b00;
+        }
+
+        .user-profile {
+            margin-top: auto;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid #ff6b00;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ff6b00;
+            font-size: 20px;
+            background-color: #fff;
+        }
+
+        /* ================= KHU VỰC NỘI DUNG CHÍNH ================= */
         .main-content {
             flex: 1;
-            padding: 25px;
+            display: flex;
+            flex-direction: column;
             overflow-y: auto;
+            padding-right: 10px;
         }
+
+        /* Thanh cuộn cho nội dung chính */
+        .main-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        .main-content::-webkit-scrollbar-thumb {
+            background: #ff6b00;
+            border-radius: 10px;
+        }
+
+        /* --- BANNER --- */
         .banner {
-            background: linear-gradient(135deg, #2c3e50, #4ca1af);
-            border-radius: 20px;
+            position: relative;
+            width: 100%;
+            height: 260px;
+            border-radius: 25px;
+            overflow: hidden;
             padding: 30px;
-            color: white;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        .banner h1 {
-            font-size: 28px;
-            margin-bottom: 10px;
-        }
-        .banner p {
-            opacity: 0.9;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            
+            /* BẠN HÃY THAY LINK ẢNH ĐƯỜNG PHỐ NHẬT BẢN VÀO DƯỚI ĐÂY */
+            background: url('https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=1200&auto=format&fit=crop') center/cover no-repeat;
         }
 
-        /* Khu vực giới thiệu */
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.5) 100%);
+            z-index: 1;
+        }
+
+        .banner-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .badge {
+            background-color: #ff6b00;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 800;
+            display: inline-block;
+            width: max-content;
+            letter-spacing: 0.5px;
+        }
+
+        .banner h1 {
+            font-size: 36px;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .btn {
+            background-color: white;
+            padding: 12px 20px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #ff6b00;
+            font-weight: 700;
+            font-size: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            transition: transform 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .btn .icon-bg {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .btn-blue .icon-bg { background-color: #e6f0ff; color: #0066ff; }
+        .btn-red .icon-bg { background-color: #ffe6e6; color: #ff3333; }
+        
+        .btn i.fa-arrow-right {
+            color: #ff6b00;
+            font-size: 14px;
+            margin-left: 5px;
+        }
+
+        .banner-right-box {
+            position: relative;
+            z-index: 2;
+            width: 450px;
+            height: 180px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+        }
+
+        /* --- PHẦN GRID (GIỚI THIỆU & HỌC PHẦN GẦN ĐÂY) --- */
         .content-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr;
+            grid-template-columns: 1.8fr 1fr; /* Tỷ lệ 2 cột giống hình */
             gap: 20px;
         }
+
         .card {
-            background: white;
+            background-color: #ffffff;
+            border-radius: 25px;
             padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            position: relative;
         }
-        .card h2 {
-            font-size: 18px;
-            color: #333;
-            margin-bottom: 15px;
-        }
-        .intro-text {
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #ff6b00;
+            font-weight: 800;
             font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Card Giới Thiệu */
+        .intro-card {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .intro-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: #222;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .intro-desc-1 {
+            border-left: 3px solid #ff6b00;
+            padding-left: 15px;
             color: #555;
+            font-size: 14px;
             line-height: 1.6;
             margin-bottom: 15px;
+            font-weight: 600;
         }
-        .highlight-jp {
-            font-weight: bold;
-            color: #ff6600;
+
+        .intro-desc-2 {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+            max-width: 60%; /* Chừa chỗ cho hình mèo */
+        }
+
+        .intro-desc-2 strong {
+            color: #ff6b00;
+            font-weight: 800;
+        }
+
+        /* Ảnh mèo thần tài */
+        .mascot-img {
+            position: absolute;
+            right: 20px;
+            bottom: 10px;
+            width: 220px;
+            height: auto;
+            /* BẠN HÃY THAY LINK ẢNH MÈO THẦN TÀI VÀO DƯỚI ĐÂY (Nên dùng ảnh đuôi .png trong suốt) */
+            /* background-image: url('link-anh-meo-cua-ban.png'); */
+        }
+
+        /* Card Học Phần Gần Đây */
+        .recent-card {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .empty-state {
+            background-color: #fffaf5;
+            border: 1px solid #ffe8d6;
+            border-radius: 15px;
+            padding: 30px 20px;
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
 
-    <!-- Thanh menu bên trái -->
-    <div class="sidebar">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
         <div class="logo">J</div>
-        <a href="#" class="nav-item active">
-            <span>🏠</span> Trang chủ
-        </a>
-        <a href="#" class="nav-item">
-            <span>📜</span> Ngữ pháp
-        </a>
-        <a href="#" class="nav-item">
-            <span>📖</span> Từ vựng
-        </a>
-        <a href="#" class="nav-item">
-            <span>漢字</span> Kanji
-        </a>
-        <a href="#" class="nav-item">
-            <span>⏱️</span> Kiểm tra
-        </a>
-        <a href="#" class="nav-item">
-            <span>🎬</span> Video
-        </a>
-    </div>
+        
+        <nav class="nav-menu">
+            <a href="#" class="nav-item active">
+                <i class="fa-solid fa-house"></i>
+                <span>Trang chủ</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fa-solid fa-scroll"></i>
+                <span>Ngữ pháp</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fa-solid fa-book-open"></i>
+                <span>Từ vựng</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fa-solid fa-language"></i>
+                <span>Kanji</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fa-solid fa-stopwatch"></i>
+                <span>Kiểm tra</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fa-solid fa-clapperboard"></i>
+                <span>Video</span>
+            </a>
+        </nav>
 
-    <!-- Nội dung trang web -->
-    <div class="main-content">
-        <div class="banner">
-            <div>
-                <span style="background: #ff6600; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: bold;">J-DEKI GO</span>
+        <div class="user-profile">
+            <i class="fa-regular fa-user"></i>
+        </div>
+    </aside>
+
+    <!-- NỘI DUNG CHÍNH -->
+    <main class="main-content">
+        
+        <!-- BANNER -->
+        <header class="banner">
+            <div class="banner-content">
+                <div class="badge">J-DEKI GO</div>
                 <h1>Xin chào Admin 2</h1>
-                <p>Học tập hiệu quả - Nâng tầm tiếng Nhật cùng bạn mỗi ngày.</p>
+                
+                <div class="action-buttons">
+                    <a href="#" class="btn btn-blue">
+                        <div class="icon-bg">
+                            <span style="font-family: serif; font-weight: bold;">あ</span>
+                        </div>
+                        Bảng chữ cái
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <a href="#" class="btn btn-red">
+                        <div class="icon-bg">
+                            <i class="fa-solid fa-stopwatch"></i>
+                        </div>
+                        Kiểm tra ngay
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
             </div>
-        </div>
+            
+            <div class="banner-right-box"></div>
+        </header>
 
-        <div class="content-grid">
-            <div class="card">
-                <h2>📖 Giới thiệu</h2>
-                <p class="highlight-jp">FPT大学カントー校における日本語非専攻生の自主学習能力向上を支援するウェブサイトの構築</p>
-                <p class="intro-text">
-                    Xây dựng website hỗ trợ nâng cao năng lực học tập tự chủ dành cho sinh viên không chuyên tiếng Nhật tại Trường Đại học FPT Cần Thơ.
-                </p>
-                <p class="intro-text">
-                    <strong>J-DEKI GO</strong> là website hỗ trợ nâng cao năng lực học tập tự chủ dành cho sinh viên không chuyên tiếng Nhật tại Trường Đại học FPT Cần Thơ. Nội dung bám sát giáo trình Dekiru Nihongo, giúp bạn học - luyện tập - kiểm tra một cách hiệu quả và theo dõi tiến độ học tập của mình.
-                </p>
-            </div>
+        <!-- LƯỚI NỘI DUNG -->
+        <section class="content-grid">
+            
+            <!-- KHU VỰC GIỚI THIỆU -->
+            <article class="card intro-card">
+                <div class="card-header">
+                    <i class="fa-solid fa-book-open"></i> GIỚI THIỆU
+                </div>
+                
+                <h2 class="intro-title">FPT大学カントー校における日本語非専攻生の自主学習能力向上を支援するウェブサイトの構築</h2>
+                
+                <div class="intro-desc-1">
+                    Xây dựng website hỗ trợ nâng cao năng lực học tập tự chủ dành cho sinh viên không chuyên tiếng Nhật tại Trường Đại học FPT Cần Thơ
+                </div>
+                
+                <div class="intro-desc-2">
+                    <strong>J-DEKI GO</strong> là website hỗ trợ nâng cao năng lực học tập tự chủ dành cho sinh viên không chuyên tiếng Nhật tại Trường Đại học FPT Cần Thơ.<br><br>
+                    Nội dung bám sát giáo trình Dekiru Nihongo, giúp bạn học - luyện tập - kiểm tra một cách hiệu quả và theo dõi tiến độ học tập của mình.
+                </div>
 
-            <div class="card">
-                <h2>⏱️ Học phần gần đây</h2>
-                <p style="color: #888; font-size: 14px; text-align: center; margin-top: 40px;">
+                <!-- Thẻ img để chèn hình mèo thần tài -->
+                <!-- <img src="link-anh-meo.png" alt="Mascot" class="mascot-img"> -->
+            </article>
+
+            <!-- KHU VỰC HỌC PHẦN GẦN ĐÂY -->
+            <aside class="card recent-card">
+                <div class="card-header">
+                    <i class="fa-regular fa-clock"></i> HỌC PHẦN GẦN ĐÂY
+                </div>
+                
+                <div class="empty-state">
                     Chưa có học phần nào. Hãy tạo học phần đầu tiên.
-                </p>
-            </div>
-        </div>
-    </div>
+                </div>
+            </aside>
+
+        </section>
+    </main>
 
 </body>
 </html>

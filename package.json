@@ -1,0 +1,46 @@
+{
+    "name": "j-deki-go",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "clean": "node -e \"const fs=require('fs');fs.rmSync('.next',{recursive:true,force:true});\"",
+        "predev": "npm run clean",
+        "dev": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/dev-fixed-port.ps1",
+        "build": "next build --webpack",
+        "start": "next start",
+        "lint": "eslint app components server src scripts next.config.js postcss.config.js tailwind.config.js eslint.config.mjs",
+        "migrate:cloudinary-r2": "node scripts/migrate-cloudinary-images-to-r2.mjs"
+    },
+    "dependencies": {
+        "@aws-sdk/client-s3": "^3.1109.0",
+        "@aws-sdk/s3-request-presigner": "^3.1109.0",
+        "@vercel/speed-insights": "^2.0.0",
+        "axios": "^1.19.0",
+        "bcryptjs": "^3.0.3",
+        "bson": "^7.3.2",
+        "cloudinary": "^2.10.0",
+        "dotenv": "^17.4.2",
+        "jsonwebtoken": "^9.0.3",
+        "lucide-react": "0.453.0",
+        "mongoose": "^9.7.4",
+        "nanoid": "3.3.17",
+        "next": "^16.3.0",
+        "react": "18.3.1",
+        "react-dom": "18.3.1",
+        "react-toastify": "^11.1.0",
+        "wanakana": "^5.3.1",
+        "zod": "^4.3.6"
+    },
+    "devDependencies": {
+        "@types/jsonwebtoken": "^9.0.10",
+        "@types/node": "^25.6.0",
+        "@types/react": "^19.2.14",
+        "@types/react-dom": "^19.2.3",
+        "autoprefixer": "10.4.19",
+        "eslint": "^9.39.5",
+        "eslint-config-next": "^16.3.0",
+        "postcss": "^8.5.23",
+        "tailwindcss": "3.4.7",
+        "typescript": "^6.0.3"
+    }
+}
